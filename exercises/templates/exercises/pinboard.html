@@ -1,0 +1,44 @@
+{% extends "test.html" %}
+{% load static %}
+
+{% block css %}
+<style>
+#pin_form{
+  padding:50px
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+  {% if user.is_authenticated %}
+    <div class="card">
+      <form action= {% url 'exercises:pin_quote_form' %} method="post">
+      {% csrf_token %}
+      <div style='margin:0px -25px 0px -25px' id='pin_form' class="form-group">
+        <textarea name='quote' class="form-control" id="quote" rows="3" placeholder='Say something'></textarea>
+        <button style='margin-top:15px' type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
+    </div>
+  {% else %}
+
+  {% endif %}
+    
+    <div class="container" style='margin-top:50px'>
+      <div class="page-header">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>Quotes</h1>
+          </div>
+          <p></p>
+        </div>
+      </div>
+    </div>
+
+    {% for quote in quotes %}
+      <p>{{ quote.message }}
+      <br />-- {{ quote.author }}</p>
+    {% endfor %}
+{% endblock %}

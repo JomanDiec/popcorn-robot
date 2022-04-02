@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Graffiti{% endblock %}
+
+{% block page_title %}Graffiti{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block body %}
+ 
+ <ol>
+{% for graffiti in graffitis %}
+<li>{{ graffiti.message }}- {{ graffiti.name }}</li>
+{% endfor %} 
+</ol>
+
+<form action="/graffiti_save" method="post">
+    {% csrf_token %} 
+    <p><textarea name="message" cols="60" rows="10"></textarea></p>
+    <p><input name="author" type="text"  /></p>
+    <button type="submit">Add</button>
+</form>
+
+{% endblock %}

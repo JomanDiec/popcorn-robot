@@ -1,0 +1,14 @@
+{% extends "base_alternate.html" %}
+{% load static %}
+
+{% block title %}<p><b>Private</b></p>{% endblock %}
+
+{% block body %}
+
+<p>Hello {{request.user}}</p>
+
+<p><span> <a href= {% url 'exercises:reset' %}>Change Password</a></span></p>
+
+<p><span> <a href= {% url 'exercises:logout_view' %}>Logout</a></span></p>
+
+{% endblock%}

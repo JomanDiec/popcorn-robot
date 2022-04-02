@@ -1,0 +1,83 @@
+from django.conf.urls import url
+from django.urls import path
+
+from . import views
+
+app_name = 'exercises'
+
+
+urlpatterns = [
+    
+    path('', views.superheroes, name='superheroes'),
+    path('animals', views.animals, name='animals'),
+    path('cars', views.cars, name='cars'),
+    path('templates', views.templates, name='templates'),
+    path('summary', views.summary, name='summary'),
+    
+    path('submit_form', views.submit_form, name='submit_form'),
+    path('team_edward', views.team_edward, name='team_edward'),
+    path('team_jacob', views.team_jacob, name='team_jacob'),
+    
+    # add new capture here
+    
+    path('create_page', views.create_page, name='create_page'),
+    path('forrest_gump', views.forrest_gump, name='forrest gump'),
+    path('wizard_of_oz', views.wizard_of_oz, name='wizard of oz'),
+    path('the_godfather', views.the_godfather, name='the godfather'),
+    path('casablanca', views.casablanca, name='casablanca'),
+    path('stocks', views.stocks, name='stocks'),
+    path('credit_listing', views.credit, name='credit'),
+    path('new_page', views.new_page, name='new_page'),
+    path('credit_card_details/<int:credit_details_id>', views.credit_details, name="credit_details"),
+    path('blog', views.blog, name='blog'),
+    path('blog_post/<int:blog_post_id>', views.blog_post, name="blog_post"),
+    path('bert', views.bert, name='bert'),
+    path('ernie', views.ernie, name='ernie'),
+    path('timon', views.timon, name='timon'),
+    path('pumba', views.pumba, name='pumba'),
+    path('results_superheroes', views.marvel, name='marvel'),
+    path('super_search', views.super_search, name='super_search'),
+    path('details_superhero/<int:hero_entry_id>', views.hero_entry, name="hero_entry"),
+    path('friend_list', views.friend_list, name='friend_list'),
+    path('friend_save', views.friend_save, name='friend_save'),
+    path('graffiti', views.graffiti, name='graffiti'),
+    path('graffiti_save', views.graffiti_save, name='graffiti_save'),
+    path('foods', views.foods, name='foods'),
+    path('food_save', views.food_save, name='food_save'),
+    path('food_entry/<int:food_entry_id>', views.food_entry, name='food_entry'),
+    path('food_edit/<int:food_entry_id>', views.food_edit, name='food_edit'),
+    path('phone_bo', views.phone_book, name='phone_book'),
+    path('phone_ada', views.phone_add, name='phone_add'),
+    path('phone_foe', views.phone_form, name='phone_form'),
+    path('phone_en/<int:phone_entry_id>', views.phone_entry, name='phone_entry'),
+    path('phone_edit_foe/<int:phone_entry_id>', views.phone_edit_form, name='phone_edit_form'),
+    path('phone_eddy/<int:phone_entry_id>', views.phone_edit, name='phone_edit'),
+    path('phone_delete/<int:phone_id>', views.phone_delete, name='phone_delete'),
+    path('athletes', views.athletes, name='athletes'),
+    path('athlete_save', views.athlete_save, name='athlete_save'),
+    path('athlete_delete/<int:athlete_id>', views.athlete_delete, name='athlete_delete'),
+    path('custom_task_list', views.task_list, name='task_list'),
+    path('custom_task_add', views.task_add, name='task_add'),
+    path('custom_task_delete/<int:task_id>', views.task_delete, name='task_delete'),
+    path('custom_task_complete/<int:task_id>', views.task_complete, name='task_complete'),
+    path('custom_task_edit_form/<int:task_id>', views.task_edit_form, name='task_edit_form'),
+    path('custom_task_edit/<int:task_id>', views.task_edit, name='task_edit'),
+    path('login_page', views.login_page, name='login_page'),
+    path('login_form', views.login_form, name='login_form'),
+    path('logout_view', views.logout_view, name='logout_view'),
+    path('private', views.private, name='private'),
+    path('public', views.public, name='public'),
+    path('reset', views.reset, name='reset'),
+    path('reset_form', views.reset_form, name='reset_form'),
+    path('registration', views.registration, name='registration'),
+    path('registration_form', views.registration_form, name='registration_form'),
+    path('pinboard', views.pinboard, name='pinboard'),
+    path('pin_quote_form', views.pin_quote_form, name='pin_quote_form'),
+    path('pin_login', views.pin_login, name='pin_login'),
+    path('pin_login_form', views.pin_login_form, name='pin_login_form'),
+    path('pin_registration', views.pin_registration, name='pin_registration'),
+    path('pin_registration_form', views.pin_registration_form, name='pin_registration_form'),
+    path('pin_change_password', views.pin_change_password, name='pin_change_password'),
+    path('pin_change_password_form', views.pin_change_password_form, name='pin_change_password_form'),
+    path('pin_logout', views.pin_logout, name='pin_logout'),
+]

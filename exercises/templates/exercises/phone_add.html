@@ -1,0 +1,19 @@
+{% extends "base_alternate.html" %}
+{% load static %}
+
+{% block title %}Add Contact{% endblock %}
+
+{% block page_title %}Phone Book{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block body %}
+ 
+<form action= {% url 'exercises:phone_form' %} method="post">
+  {% csrf_token %} 
+  <p><input name="name" type="text" placeholder="name" /></p>
+  <p><input name="number" type="text" placeholder="phone" /></p>
+  <p><textarea name="address" placeholder="address" cols="60" rows="10"></textarea></p>
+  <button type="submit">Add</button>
+</form>
+
+{% endblock %}

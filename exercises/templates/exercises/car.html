@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cars{% endblock %}
+
+{% block page_title %}Cars{% endblock %}
+{% block lead %}If all the cars in the United States were placed end to end, it would probably be Labor Day Weekend.{% endblock %}
+
+{% block body %}
+    
+    <div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- <div class="page-header">
+              <h1 id="tables">Tables</h1>
+            </div> -->
+
+            <div class="bs-component">              
+              <table class='table table-hover'>
+				<thead>
+					<tr>
+						<th>Make</th>
+						<th>Model</th>
+						<th>Year</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for car in cars %}
+					<tr>
+						<td>{{ car.make }}</td>
+						<td>{{ car.model }}</td>
+						<td>{{ car.year }}</td>
+					</tr>
+				{% endfor %}	
+				</tbody>		                                 
+              </table>
+            </div><!-- /example -->
+          </div>
+        </div>
+      </div>
+
+
+{% endblock %}

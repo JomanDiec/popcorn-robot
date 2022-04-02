@@ -1,0 +1,19 @@
+{% extends "base_alternate.html" %}
+{% load static %}
+
+{% block title %}Add Contact{% endblock %}
+
+{% block page_title %}Edit Contact{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block body %}
+ 
+<form action= {%  url 'exercises:phone_edit' phone_entry_id=phone.id %} method="post">
+  {% csrf_token %} 
+  <p><input name="name" type="text" value="{{phone.name}}" /></p>
+  <p><input name="number" type="text" value="{{phone.number}}" /></p>
+  <p><textarea name="address" cols="60" rows="10">{{phone.address}}</textarea></p>
+  <button type="submit">Update</button>
+</form>
+
+{% endblock %}

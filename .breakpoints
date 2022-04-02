@@ -1,0 +1,46 @@
+{
+  "files": {
+    "exercises/templates/base.html": [
+      {
+        "id": "7f6e9e13-affb-4f11-8dba-36adab8b53ae",
+        "line": 10,
+        "version": 100,
+        "index": 236
+      }
+    ],
+    "exercises/templates/base_alternate.html": [
+      {
+        "id": "4225695e-961d-447a-afe8-7d1a7953f72f",
+        "line": 29,
+        "version": 332,
+        "index": 1068
+      },
+      {
+        "id": "b91f62d6-f9f2-4ac8-b982-0d344f056723",
+        "line": 29,
+        "version": 332,
+        "index": 1068
+      },
+      {
+        "id": "30e1757b-4eee-4b06-916f-b95f7bf800e0",
+        "line": 29,
+        "version": 332,
+        "index": 1068
+      },
+      {
+        "id": "aa26ad4a-7d31-420f-817f-fac15d42af10",
+        "line": 54,
+        "version": 332,
+        "index": 1939
+      }
+    ],
+    "exercises/templates/exercises/task_edit_form.html": [
+      {
+        "id": "246a6e67-8c27-448d-aab8-be0d37f14d59",
+        "line": 13,
+        "version": 553,
+        "index": 296
+      }
+    ]
+  }
+}

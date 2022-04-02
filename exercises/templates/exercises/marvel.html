@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Marvel{% endblock %}
+
+{% block page_title %}Superhero Search{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block body %}
+ 
+ <img src='{% static "img/marvel.jpg" %}' />
+
+<form action="/super_search" method="post">
+    {% csrf_token %}
+    <input type="text" name="hero_name" />
+    <button type="submit">submit</button>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "test.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="container">
+      <div class="page-header">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>Register</h1>
+          </div>
+          <p></p>
+        </div>
+      </div>
+    </div>
+
+              <div class="card">
+                <p></p>
+                <div class="card-body">
+                  <form action= {% url 'exercises:pin_registration_form' %} method="post">
+                  {% csrf_token %} 
+                  <div class="form-group">
+                    <label for="username" class="form-label mt-4">Username</label>
+                    <input type="text" class="form-control" name='username' id="username" aria-describedby="username" placeholder="Create Username">
+                  </div>
+                  <div class="form-group">
+                    <label for="email" class="form-label mt-4">Email address</label>
+                    <input type="email" class="form-control" name='email' id="email" aria-describedby="email" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="form-label mt-4">Password</label>
+                    <input type="password" class="form-control" name='password' id="password" placeholder="Password">
+                  </div>
+                  <p></p>
+                  <button type="submit" class="btn btn-primary">Create Account</button>
+                  </form>               
+                </div>
+                <p></p>
+                <p></p>
+              </div>
+  {% endblock %}

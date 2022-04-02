@@ -1,0 +1,26 @@
+{% extends "base_alternate.html" %}
+{% load static %}
+
+{% block title %}<p><b>Login</b></p>{% endblock %}
+
+{% block body %}
+<form action= {% url 'exercises:login_form' %} method="post">
+  {% csrf_token %} 
+  <div class="container">
+    <label for="username"><b>Username</b></label>
+    <p><input type="text" id='username' placeholder="Enter Username" name="username" required></p>
+
+    <label for="password"><b>Password</b></label>
+    <p><input type="password" id='password' placeholder="Enter Password" name="password" required></p>
+
+    <p><button type="submit" class="btn btn-primary" >Login</button></p>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+    <p><span class="psw">Forgot <a href="#">password?</a></span></p>
+    <p><a href= {% url 'exercises:registration' %}>Register</a> new account</p>
+  </div>
+
+</form> 
+
+{% endblock %}

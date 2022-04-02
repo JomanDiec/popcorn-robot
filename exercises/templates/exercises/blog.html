@@ -1,0 +1,26 @@
+{% extends "base_alternate.html" %}
+{% load static %}
+
+{% block title %} new page title{% endblock %}
+
+{% block page_title %}Photography Blog{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+
+
+{% block body %}
+
+
+<!-- BEGIN CODE HERE -->
+<img src='{% static "img/photography.jpg" %}' />
+
+{% for post in blog %}
+<li><a href="/blog_post/{{ post.id }}">{{post.title}}</li>
+{% endfor %} 
+
+<!-- END CODE HERE -->
+
+{% endblock %}

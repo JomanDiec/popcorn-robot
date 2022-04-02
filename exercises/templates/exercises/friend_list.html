@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Friends{% endblock %}
+
+{% block page_title %}Friends{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block body %}
+ 
+ <ol>
+{% for friend in all_friends %}
+<li>{{ friend.name }}</li>
+{% endfor %} 
+</ol>
+
+<form action="/friend_save" method="post">
+    {% csrf_token %} 
+    <input type="text" name="full_name" />
+    <button type="submit">submit</button>
+</form>
+
+{% endblock %}

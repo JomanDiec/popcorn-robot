@@ -1,0 +1,31 @@
+{% extends "ask_it/base.html" %}
+
+{% block body %}
+<style>
+.center_frame {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+.align_right {
+  float: right;
+  padding: 0px;
+}
+
+</style>
+
+      <div style='margin:40px -25px 0px -25px' id='pin_form' class="form-group">
+      <form action= {% url 'ask_it:question_form' %} method="post">
+      {% csrf_token %}
+        <div class='center_frame'>
+          <input name='question' type="text" class="form-control" placeholder="Title" id="inputDefault">
+          <br>
+          <textarea name='message' class="form-control" id="message" rows="4" placeholder='Text (optional)'></textarea>
+          <div class='right'>
+          <button style='margin-top:15px' type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      </div>
+
+{% endblock %}

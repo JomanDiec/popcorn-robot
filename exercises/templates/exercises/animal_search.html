@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}pumba{% endblock %}
+
+{% block page_title %}Animal Search{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block body %}
+    
+             <table class='table table-striped'>
+
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Birthplace</th>
+						<th>Male</th>
+					</tr>
+				</thead>
+				<tbody style = 'text-align:left'>
+				{% for animal in animals %}
+					<tr>
+						<td>{{ animal.name }}</td>
+						<td>{{ animal.birthplace }}</td>
+						<td>{{ animal.is_male }}</td>
+					</tr>
+				{% endfor %}										
+				</tbody>				                                 
+              </table>
+
+{% endblock %}

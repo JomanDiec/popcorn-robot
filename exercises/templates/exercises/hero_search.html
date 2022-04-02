@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} {{ hero_name }} -Search results{% endblock %}
+
+{% block page_title %}Superhero Search{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block lead %}
+<p> {{ results }} results for {{ hero_name }} </p>
+{% endblock %}
+
+{% block body %}
+
+
+<!-- BEGIN CODE HERE -->
+<img src='{% static "img/marvel.jpg" %}' />
+
+        <table class='table table-striped'>
+
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Superpower</th>
+						<th>Age</th>
+					</tr>
+				</thead>
+				<tbody style = 'text-align:left'>
+				{% for hero in superheroes %}
+					<tr>
+						<td><a href="{% url 'exercises:hero_entry' hero_entry_id=hero.id %}">{{ hero.name }}</td>
+						<td>{{ hero.superpower }}</td>
+						<td>{{ hero.age }}</td>
+					</tr>
+				{% endfor %}										
+				</tbody>				                                 
+              </table>
+
+<!-- END CODE HERE -->
+
+{% endblock %}

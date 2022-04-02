@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Timon{% endblock %}
+
+{% block page_title %}Animal Search{% endblock %}
+{% block lead %}{% endblock %}
+
+{% block body %}
+ 
+<form action="/pumba" method="post">
+    {% csrf_token %} 
+    <input type="text" name="animal_name" />
+    <button type="submit">submit</button>
+</form>
+
+
+{% endblock %}

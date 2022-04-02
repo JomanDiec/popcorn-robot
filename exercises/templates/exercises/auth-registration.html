@@ -1,0 +1,23 @@
+{% extends "base_alternate.html" %}
+{% load static %}
+
+{% block title %}Registration{% endblock %}
+
+{% block body %}
+<form action= {% url 'exercises:registration_form' %} method="post">
+  {% csrf_token %} 
+  <div class="container">
+    <label for="username"><b>Username</b></label>
+    <p><input type="text" id='username' placeholder="Enter Username" name="username" required></p>
+
+    <label for="email"><b>E-mail</b></label>
+    <p><input type="text" id='email' placeholder="Enter E-mail" name="email" required></p>
+
+    <label for="password"><b>Password</b></label>
+    <p><input type="password" id='password' placeholder="Enter Password" name="password" required></p>
+
+    <p><button type="submit" class="btn btn-primary" >Create New Account</button></p>
+  </div>
+</form> 
+
+{% endblock %}
