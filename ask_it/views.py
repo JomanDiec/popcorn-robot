@@ -26,9 +26,11 @@ def home(request):
   sort = request.GET.get('sort')
   size = Ask_it.objects.count()
   posts = Ask_it.objects.order_by('-id')
+  search = ''
   # thread = Reply.objects.filter(parent=question_thread_id)
   if 'search_term' in request.GET:
     questions = Ask_it.objects.filter(Q(question__icontains=request.GET['search_term']) | Q(message__icontains=request.GET['search_term']))
+    search = request.GET['search_term']
   elif sort == 'latest':
     questions = Ask_it.objects.order_by('-created_at')
   elif sort == 'popular':
@@ -39,11 +41,6 @@ def home(request):
   paginator = Paginator(questions, 3)
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
-  
-  if 'search_term' in request.GET:
-    search = request.GET['search_term']
-  else:
-    search = ''
   
   context = { 'questions' : questions , 'size' : size , posts : 'posts' , 'page_obj': page_obj, 'search' : search}
   return render(request, 'ask_it/home.html', context, )
