@@ -124,3 +124,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR + "/media"

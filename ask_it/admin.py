@@ -4,6 +4,7 @@ from .models import *
 
 admin.site.register(Ask_it)
 admin.site.register(Cookie_jar)
+admin.site.register(QuestionImage)
 
 # from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # from django.contrib.auth.models import User

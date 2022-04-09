@@ -160,3 +160,10 @@ class Upvoted(models.Model):
 
   def __str__(self):
     return str(self.user)
+
+class QuestionImage(models.Model):
+    title = models.TextField()
+    cover = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title
