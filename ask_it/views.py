@@ -18,9 +18,14 @@ def test_page(request):
   return HttpResponse("Bingo!")
 
 def test(request):
-  
-  context = {"author": "gaurav singhal",}
+  images = QuestionImage.objects.all()
+
+  context = {"author": "gaurav singhal", 'images' : images}
   return render(request, 'ask_it/test.html', context)
+
+class HomePageView(ListView):
+    model = QuestionImage
+    template_name = "test.html"
 
 def home(request):
   sort = request.GET.get('sort')

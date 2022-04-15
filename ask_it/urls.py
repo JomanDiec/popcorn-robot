@@ -1,11 +1,13 @@
 from django.urls import include, path
 from django.urls import re_path as url
 from . import views
+from .views import HomePageView
 
 app_name = 'ask_it'
 
 urlpatterns = [
   path('test_page', views.test_page, name='test_page'),
+  path("image_test", HomePageView.as_view(), name="test"),
   path('test', views.test, name='test'),
   path('home', views.home, name='home'),
   path('latest_sort', views.latest_sort, name='latest_sort'),
