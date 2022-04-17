@@ -27,10 +27,24 @@
 {% upper 'joman' %}
 
 <h1>Django Image Uploading</h1>
+
+<div class="container">
+
+  <!--Simple Form-->
+  <h2 class="my-4">Add a new image</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <input type="file" name="upload" accept="image/*">
+        <br>
+        <button class="btn btn-dark my-4" type="submit">Submit</button>
+  </form>
+
+</div>
+
 <ul>
   {% for post in images %}
-    <h2>{{ post.title }}</h2>
-    <img src="{{ post.cover.url}}" alt="{{ post.title }}">
+    <h2>{{ post.caption }}</h2>
+    <img src="{{ post.cover.url}}" alt="{{ post.caption }}">
   {% endfor %}
 </ul>
 

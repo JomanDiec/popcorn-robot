@@ -45,7 +45,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link {% if request.GET.sort == "latest" %}btn btn-light{% endif %}" href='{% url 'ask_it:home'%}?sort=latest'>Latest</a>
+              <a class="nav-link {% if request.GET.sort == "oldest" %}btn btn-light{% endif %}" href='{% url 'ask_it:home'%}?sort=oldest'>Oldest</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if request.GET.sort == "popular" %}btn btn-light{% endif %}" href='{% url 'ask_it:home'%}?sort=popular'>Most Popular</a>

@@ -7,10 +7,20 @@ import math
 
 # Create your models here.
 
+
+class QuestionImage(models.Model):
+    caption = models.TextField(blank = True, null = True)
+    cover = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.caption
+
 class Ask_it(models.Model):
   question = models.CharField(max_length = 255)
   message = models.TextField(blank = True, null = True)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
+  image_caption = models.TextField(blank = True, null = True)
+  image = models.ImageField(upload_to='images/', blank = True, null = True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   upvotes = models.IntegerField(default = 1)
@@ -161,9 +171,3 @@ class Upvoted(models.Model):
   def __str__(self):
     return str(self.user)
 
-class QuestionImage(models.Model):
-    title = models.TextField()
-    cover = models.ImageField(upload_to='images/')
-
-    def __str__(self):
-        return self.title

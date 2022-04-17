@@ -14,18 +14,23 @@
 
 </style>
 
-      <div style='margin:40px -25px 0px -25px' id='pin_form' class="form-group">
-      <form action= {% url 'ask_it:question_form' %} method="post">
-      {% csrf_token %}
+    <div style='margin:40px -25px 0px -25px' id='pin_form' class="form-group">
+      <form action= {% url 'ask_it:question_form' %} method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class='center_frame'>
           <input name='question' type="text" class="form-control" placeholder="Title" id="inputDefault">
           <br>
           <textarea name='message' class="form-control" id="message" rows="4" placeholder='Text (optional)'></textarea>
+          <br>
+          <h6>Add Image (optional)</h6>
+          <input type="file" name="upload" accept="image/*">
+          <input type='text' name='caption' class='form-control' placeholder='Caption (optional)'>
+          <br>
           <div class='right'>
-          <button style='margin-top:15px' type="submit" class="btn btn-primary">Submit</button>
+            <button style='margin-top:15px' type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </form>
-      </div>
+    </div>
 
 {% endblock %}

@@ -23,6 +23,7 @@ def test(request):
   context = {"author": "gaurav singhal", 'images' : images}
   return render(request, 'ask_it/test.html', context)
 
+# not being used
 class HomePageView(ListView):
     model = QuestionImage
     template_name = "test.html"
@@ -36,12 +37,12 @@ def home(request):
   if 'search_term' in request.GET:
     questions = Ask_it.objects.filter(Q(question__icontains=request.GET['search_term']) | Q(message__icontains=request.GET['search_term']))
     search = request.GET['search_term']
-  elif sort == 'latest':
-    questions = Ask_it.objects.order_by('-created_at')
+  elif sort == 'oldest':
+    questions = Ask_it.objects.order_by('created_at')
   elif sort == 'popular':
     questions = Ask_it.objects.order_by('-upvotes')
   else:
-    questions = Ask_it.objects.all().order_by('created_at')
+    questions = Ask_it.objects.all().order_by('-created_at')
 
   paginator = Paginator(questions, 3)
   page_number = request.GET.get('page')
@@ -193,12 +194,14 @@ def question(request):
 def question_form(request):
   question = request.POST['question']
   message = request.POST['message']
+  upload = request.FILES.get('upload', None)
+  caption = request.POST['caption']
   author = request.user
-  posting = Ask_it.objects.create(question=question, message=message, author=author )
+  posting = Ask_it.objects.create(question=question, message=message, author=author, image=upload, image_caption=caption)
   upvote = Upvoted.objects.create(user=author, upvoted_questions=posting)
   print(posting)
 
-  return HttpResponseRedirect(reverse('ask_it:home'))
+  return HttpResponseRedirect(reverse('ask_it:question_thread' , kwargs={'question_thread_id':posting.id}))
 
 def question_thread(request, question_thread_id):
   question = Ask_it.objects.get(id=question_thread_id)

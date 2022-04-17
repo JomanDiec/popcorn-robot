@@ -36,6 +36,12 @@ div.relative {
   background-color: #2196F3;
   padding: 10px;
 }
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 </style>
 <!-- <div class='container'>
   <div class='row'>
@@ -59,6 +65,10 @@ div.relative {
     <h4 class="card-title"><a href="{%  url 'ask_it:question_thread' question_thread_id=question.id %}">{{question.question}}</a></h4>
     <h6 class="card-subtitle mb-2 text-muted">Posted by {{question.author}} {{question.whenpublished}}<span style='color:#ce4300'>{% if question.cookies != 0 %}
     <i class="fas fa-cookie-bite">x{{question.cookies}}</i>{% endif %}</span></h6>
+    {% if question.image %}
+    <h4>{{ question.image_caption }}</h4>
+      <img src='{{question.image.url}}'>
+    {% endif %}
     <p class="card-text">{{question.message}}</p>
     <a href="#" class="card-link" style='text-decoration: initial'>{{ question.reply_set.all|length }} response{% if question.reply_set.all|length != 1 %}s{% endif %}</a>
     {% if user.is_authenticated %}
