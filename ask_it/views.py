@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.views.generic import ListView
 from django.core.paginator import Paginator
+import os
 
 def test_page(request):
   return HttpResponse("Bingo!")
@@ -55,6 +56,8 @@ def home(request):
 def question_delete(request, question_id):
   question = Ask_it.objects.get(id=question_id)
   if request.user == question.author:
+    if question.image != None:
+      os.remove(question.image.path)
     question.delete()
   else:
     HttpResponse('you are not the author')
