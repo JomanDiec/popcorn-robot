@@ -173,19 +173,28 @@ def ask_login_form(request):
   else:
     return HttpResponseRedirect(reverse('ask_it:ask_login'))
 
-def registration(request):
+def registration(request, *args):
+
 
   context = { }
-  return render(request, 'ask_it/registration.html', context)
+  return render(request, 'ask_it/registration.html',context)
 
 def registration_form(request):
+  next = request.GET.get('next', '/home')
   username = request.POST['username']
   email = request.POST['email']
   password = request.POST['password']
-  user = User.objects.create_user(username, email, password)
-  cookie_jar = Cookie_jar.objects.create(user=user)
+  username_check = User.objects.filter(username=username).exists()
+  if username_check==False and username and password:
+    user = User.objects.create_user(username, email, password)
+    cookie_jar = Cookie_jar.objects.create(user=user)
 
-  return HttpResponseRedirect(reverse('ask_it:ask_login'))
+    return HttpResponseRedirect(reverse('ask_it:ask_login'))
+  else:
+    # return HttpResponseRedirect(reverse('ask_it:registration',['sort=popular']))
+    return HttpResponseRedirect(next)
+
+  
 
 @login_required
 def question(request):
