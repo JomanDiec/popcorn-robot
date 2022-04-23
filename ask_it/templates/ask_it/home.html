@@ -6,22 +6,28 @@
 {% extends "ask_it/base.html" %}
 {% load custom_tags %}
 
-{% block body %}
-<style>
+{% block style %}
 
 img {
   max-height: 10%;
   max-width: 10%;
 }
 
-</style>
-<div class="right">
-<a type="button" class="btn btn-primary" href={% url 'ask_it:question' %}>New Question</a>
-</div>
-</br>
+{% endblock %}
+
+{% block body %}
+
+
+
+
 {% if size == 0 or questions.count == 0 %}
 No results found
 {% endif %}
+<div class='container'>
+  <div class="right" style= 'padding-right: 10px'>
+    <a type="button" class="btn btn-primary" href={% url 'ask_it:question' %}>New Question</a>
+    </div>
+    </br>
 {% for question in page_obj %}
 <div class='container'>
   <div class='row'>
@@ -62,55 +68,57 @@ No results found
 </br>
 
 {% endfor %}
-
 <div class="pagination" style='padding:0px 120px'>
-        {% if page_obj.has_previous and search != '' %}
-        <li class="page-item">
-          <a class="page-link" href='{{request.get_full_path}}?page=1'>&laquo; first</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}">previous</a>
-        </li>
-        {% elif page_obj.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page=1">&laquo; first</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" href="#">&laquo; first</a>
-        </li>
-        <li class="page-item disabled">
-            <a class="page-link" href="#}">previous</a>
-        {% endif %}
+  {% if page_obj.has_previous and search != '' %}
+  <li class="page-item">
+    <a class="page-link" href='{{request.get_full_path}}?page=1'>&laquo; first</a>
+  </li>
+  <li class="page-item">
+      <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}">previous</a>
+  </li>
+  {% elif page_obj.has_previous %}
+  <li class="page-item">
+      <a class="page-link" href="?page=1">&laquo; first</a>
+  </li>
+  <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+  </li>
+  {% else %}
+  <li class="page-item disabled">
+      <a class="page-link" href="#">&laquo; first</a>
+  </li>
+  <li class="page-item disabled">
+      <a class="page-link" href="#}">previous</a>
+  {% endif %}
 
-        {% if page_obj.has_next and search != '' %}
-        <li class="page-item">
-            <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}">next</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        </li>
-        {% elif page_obj.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        </li>        
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" href="#">next</a>
-        </li>
-        <li class="page-item disabled">
-            <a class="page-link" href="#">last &raquo;</a>
-        </li>
-        {% endif %}
-      </li>
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+  {% if page_obj.has_next and search != '' %}
+  <li class="page-item">
+      <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}">next</a>
+  </li>
+  <li class="page-item">
+      <a class="page-link" href="{{ request.get_full_path }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+  </li>
+  {% elif page_obj.has_next %}
+  <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+  </li>
+  <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+  </li>        
+  {% else %}
+  <li class="page-item disabled">
+      <a class="page-link" href="#">next</a>
+  </li>
+  <li class="page-item disabled">
+      <a class="page-link" href="#">last &raquo;</a>
+  </li>
+  {% endif %}
+</li>
+Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 </div>
+</div>
+
+
 <!-- 
 
 Arlene implementation

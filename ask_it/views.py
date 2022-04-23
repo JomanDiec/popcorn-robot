@@ -45,7 +45,7 @@ def home(request):
   else:
     questions = Ask_it.objects.all().order_by('-created_at')
 
-  paginator = Paginator(questions, 3)
+  paginator = Paginator(questions, 4)
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   
@@ -173,7 +173,7 @@ def ask_login_form(request):
   else:
     return HttpResponseRedirect(reverse('ask_it:ask_login'))
 
-def registration(request, *args):
+def registration(request):
 
 
   context = { }
