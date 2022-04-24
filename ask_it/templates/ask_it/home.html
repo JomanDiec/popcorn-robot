@@ -25,9 +25,9 @@ No results found
 {% endif %}
 <div class='container'>
   <div class="right" style= 'padding-right: 10px'>
-    <a type="button" class="btn btn-primary" href={% url 'ask_it:question' %}>New Question</a>
+    <a class="btn btn-primary" href={% url 'ask_it:question' %}>New Question</a>
     </div>
-    </br>
+    <br>
 {% for question in page_obj %}
 <div class='container'>
   <div class='row'>
@@ -65,10 +65,14 @@ No results found
 </div>
 </div>
 </div>
-</br>
+<br>
 
 {% endfor %}
-<div class="pagination" style='padding:0px 120px'>
+<div class='container'>
+<div class='row'>
+  <div class='col-1' ></div>
+  <div class='col-11'>
+<div class="pagination">
   {% if page_obj.has_previous and search != '' %}
   <li class="page-item">
     <a class="page-link" href='{{request.get_full_path}}?page=1'>&laquo; first</a>
@@ -89,6 +93,7 @@ No results found
   </li>
   <li class="page-item disabled">
       <a class="page-link" href="#}">previous</a>
+  </li>
   {% endif %}
 
   {% if page_obj.has_next and search != '' %}
@@ -113,11 +118,11 @@ No results found
       <a class="page-link" href="#">last &raquo;</a>
   </li>
   {% endif %}
-</li>
 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 </div>
 </div>
-
+</div>
+</div>
 
 <!-- 
 
