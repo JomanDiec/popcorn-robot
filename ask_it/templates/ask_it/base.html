@@ -18,7 +18,7 @@
               integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
               crossorigin="anonymous"
               referrerpolicy="no-referrer"/>
-        <style>
+<style>
     div.center {
       text-align: center;
     }
@@ -71,7 +71,7 @@
                                     <a class="dropdown-item" href={% url 'ask_it:change_password' %}>Change Password</a>
                                     <a class="dropdown-item" href={% url 'ask_it:ask_logout' %}>Logout</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="../5/superhero/_variables.scss" download>Cookie Jar <i class="fas fa-cookie-bite" style='color:#ce4300'>x{{ request.user.cookie_jar.cookies }}</i></a>
+                                    <a class="dropdown-item">Cookie Jar <i class="fas fa-cookie-bite" style='color:#ce4300'>x{{ request.user.cookie_jar.cookies }}</i></a>
                                 </div>
                             </li>
                         {% else %}
@@ -107,7 +107,6 @@
           <div class='right'>
             <a href="#top">Back to top</a>   
           </div>
-        </div>
       </div>
     </div>
             <script src="{% static "js/jsquery.js" %}"></script>

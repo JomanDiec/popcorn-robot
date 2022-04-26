@@ -1,7 +1,7 @@
 {% extends "ask_it/base.html" %}
 
-{% block body %}
-<style>
+
+{% block style %}
 .center_frame {
   margin: auto;
   width: 60%;
@@ -12,13 +12,21 @@
   padding: 0px;
 }
 
-</style>
+{% endblock %}
 
+{% block body %}
     <div style='margin:40px -25px 0px -25px' id='pin_form' class="form-group">
-      <form action= {% url 'ask_it:question_form' %} method="post" enctype="multipart/form-data">
+      <form action= "{% url 'ask_it:question_form' %}?next={% url 'ask_it:question' %}?next=invalid_input" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class='center_frame'>
+          {% if request.GET.next == "invalid_input" %}
+          <div class="form-group has-danger">
+            <input name='question' type="text" class="form-control is-invalid" placeholder="Title" id="question">
+            <div class="invalid-feedback" style= 'color:#f7746a'>Your post must have a title.</div>
+          </div>
+          {% else %}
           <input name='question' type="text" class="form-control" placeholder="Title" id="inputDefault">
+          {% endif %}
           <br>
           <textarea name='message' class="form-control" id="message" rows="4" placeholder='Text (optional)'></textarea>
           <br>

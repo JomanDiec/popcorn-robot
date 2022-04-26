@@ -10,6 +10,8 @@ def upvote_filter(context, user, question):
   if user.is_authenticated:
     if Upvoted.objects.filter(user=user, upvoted_questions=question).exists():
       return 'color:#FF5733'
+    else:
+      return ''
   else:
     return ''
 
@@ -19,6 +21,8 @@ def reply_filter(context, user, reply):
   if user.is_authenticated:
     if Upvoted.objects.filter(user=user, upvoted_reply=reply).exists():
       return 'color:#FF5733'
+    else:
+      return ''
   else:
     return ''
 
