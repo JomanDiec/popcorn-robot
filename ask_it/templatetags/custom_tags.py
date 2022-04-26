@@ -5,7 +5,7 @@ from ask_it.models import *
 register = template.Library()
 
 @register.simple_tag(takes_context=True)
-def upvote_filter(context, user, question):
+def upvote_filter(context, user, question): #checks if user has upvoted post or not, changes color of chevron and upvote number if true
   user = context['request'].user
   if user.is_authenticated:
     if Upvoted.objects.filter(user=user, upvoted_questions=question).exists():
@@ -13,7 +13,7 @@ def upvote_filter(context, user, question):
     else:
       return ''
   else:
-    return ''
+    return '' #for guests/logged out users
 
 @register.simple_tag(takes_context=True)
 def reply_filter(context, user, reply):
