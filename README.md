@@ -1,3 +1,5 @@
+install Pillow library for image handling.
+
 # Developing Django on Repl.it
 
 - Fork this template to get started

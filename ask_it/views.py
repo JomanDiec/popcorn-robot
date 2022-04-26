@@ -188,8 +188,10 @@ def registration_form(request):
   if username_check==False and username.strip() and password.strip(): #checks for duplicate names/passwords, blank names/passwords, and names/passwords consisting only of white space
     user = User.objects.create_user(username, email, password)
     cookie_jar = Cookie_jar.objects.create(user=user)
+    new_user=authenticate(request, username=username, password=password)
+    login(request, new_user)
 
-    return HttpResponseRedirect(reverse('ask_it:ask_login'))
+    return HttpResponseRedirect(reverse('ask_it:home'))
   else:
     # return HttpResponseRedirect(reverse('ask_it:registration',['sort=popular']))
     return HttpResponseRedirect(next)

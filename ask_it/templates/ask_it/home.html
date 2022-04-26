@@ -20,9 +20,7 @@ img {
 
 
 
-{% if size == 0 or questions.count == 0 %}
-No results found
-{% endif %}
+
 <div class='container'>
   <div class="right" style= 'padding-right: 10px'>
     <a class="btn btn-primary" href={% url 'ask_it:question' %}>New Question</a>
@@ -72,8 +70,12 @@ No results found
 {% comment %} paginator links {% endcomment %}
 <div class='container'>
 <div class='row'>
-  <div class='col-1' ></div>
+  <div class='col-1' >
+  </div>
   <div class='col-11'>
+    {% if size == 0 or questions.count == 0 %}
+    No results found
+    {% endif %}
 <ul class="pagination">
   {% if page_obj.has_previous and search != '' %}
   <li class="page-item">

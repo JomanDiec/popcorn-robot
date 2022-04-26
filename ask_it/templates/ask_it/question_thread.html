@@ -67,7 +67,7 @@ img {
     <p class="card-text">{{question.message}}</p>
     <a href="#" class="card-link" style='text-decoration: initial'>{{ question.reply_set.all|length }} response{% if question.reply_set.all|length != 1 %}s{% endif %}</a>
     {% if user.is_authenticated %}
-    {% if user != question.author %}<a href="{% url 'ask_it:give_cookie' receiver_id=question.id %}?next={{request.path}}" class="card-link" style='text-decoration: initial ' onclick="return confirm('Give a cookie to {{question.author}}?')">Give Cookie</a>
+    {% if user != question.author and user.cookie_jar.cookies > 0%}<a href="{% url 'ask_it:give_cookie' receiver_id=question.id %}?next={{request.path}}" class="card-link" style='text-decoration: initial ' onclick="return confirm('Give a cookie to {{question.author}}?')">Give Cookie</a>
     {% elif user == question.author %}
     <a href="{% url 'ask_it:question_delete' question_id=question.id %}" class="card-link" style='text-decoration: initial' onclick="return confirm('Are you sure?')">Delete</a>
     {% endif %}
