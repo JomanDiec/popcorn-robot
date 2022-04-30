@@ -131,7 +131,7 @@ def give_cookie(request, receiver_id):
     next = request.GET.get('next', '/home')
     return HttpResponseRedirect(next) #direct to current page
   else:
-    HttpResponse('you dont have any cookies, you should not be here!') #should not be accessible
+    return HttpResponse('you dont have any cookies, you should not be here!') #should not be accessible
 
 @login_required
 def give_reply_cookie(request, receiver_id):
@@ -149,7 +149,7 @@ def give_reply_cookie(request, receiver_id):
     next = request.GET.get('next', '/home')
     return HttpResponseRedirect(next)
   else:
-    HttpResponse('you dont have any cookies, you should not be here!')
+    return HttpResponse('you dont have any cookies, you should not be here!')
 
 # alternate function to above (not currently being used)
 def latest_sort(request):

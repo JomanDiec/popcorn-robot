@@ -38,7 +38,7 @@ class Ask_it(models.Model):
       seconds= diff.seconds
       
       if seconds == 1:
-        return str(seconds) +  "second ago"
+        return str(seconds) +  " second ago"
       else:
         return str(seconds) + " seconds ago"
         
@@ -107,7 +107,7 @@ class Reply(models.Model):
       seconds= diff.seconds
       
       if seconds == 1:
-        return str(seconds) +  "second ago"
+        return str(seconds) +  " second ago"
       else:
         return str(seconds) + " seconds ago"
         
