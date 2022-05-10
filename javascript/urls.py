@@ -8,6 +8,6 @@ app_name = 'javascript'
 
 urlpatterns = [
     # add new capture here
-    
+    path('traverse', views.traverse, name='traverse'),
     
 ]

@@ -20,9 +20,37 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
     <script>
       // Script tag #2
+            // Page load event
+      document.addEventListener("DOMContentLoaded", () => {
+
+        let pixel_1 = document.querySelector("#cap_pixel_1");
+        console.log(pixel_1);
+        pixel_1.classList.add('green_pixel');
+
+        let pict_1 = document.querySelector('#picture_1');
+        spot_1 = pict_1.querySelectorAll('.spot_1');
+        for (pic of spot_1){
+          pic.classList.add('white_pixel')
+        }
+
+        start_5 = document.querySelector('#start_5');
+        start_5.parentElement.classList.add('green_pixel')
+
+        start_6 = document.querySelector('#start_6')
+        spot_2 = start_6.querySelectorAll('.spot_2')
+        for (pix of spot_2){
+          pix.classList.add('white_pixel')
+        }
+
+        head = start_6.nextElementSibling.querySelectorAll('.head')
+        for (pix of head){
+          pix.classList.add('black_pixel')
+        }
+
+      });
+
     </script>
   </head>
 
@@ -438,10 +466,6 @@
       </div>
 
     </div><!-- /.container -->
-
-    <script>
-      // Script tag #1
-    </script>
 
   </body>
 </html>
