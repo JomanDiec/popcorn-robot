@@ -49,6 +49,87 @@
           pix.classList.add('black_pixel')
         }
 
+        start_7 = document.querySelector('#start_7')
+        for (pixel of start_7.children){
+          face = pixel.querySelectorAll('.face')
+            for (pix of face){
+            pix.classList.add('white_pixel')
+          }
+        }
+        
+        cap_color = start_7.previousElementSibling.children
+        for (pixel of cap_color){
+          cap=pixel.querySelectorAll('.cap_color')
+            for (pix of cap){
+            pix.classList.add('green_pixel')
+          }
+        }
+
+        eyes = pict_1.querySelector('#start_7').children
+        for (pixel of eyes){
+          eye_pix = pixel.querySelectorAll('.eyes')
+          for (pix of eye_pix){
+            pix.classList.add('black_pixel')
+          }
+        }
+
+        spot_3 = start_5.closest('#picture_1').querySelector('#start_6').children
+        for (pixel of spot_3){
+          spot_3_pix = pixel.querySelectorAll('.spot_3')
+          for (pix of spot_3_pix){
+            pix.classList.add('white_pixel')
+          }
+        }
+
+        cap = start_5.closest('#picture_1').querySelector('#start_6').children
+        for (pixel of cap){
+          cap_pix = pixel.querySelectorAll('.cap')
+          for (pix of cap_pix){
+            pix.classList.add('black_pixel')
+          }
+        }
+
+        reveal_1 = document.querySelector('#reveal_1')
+        left_antenna = reveal_1.querySelectorAll('.left_antenna')
+        for (pixel of left_antenna){
+          pixel.classList.add('white_pixel')
+        }
+
+        reveal_2 = document.querySelector('#reveal_2')
+        right_antenna = reveal_2.parentElement.querySelectorAll('.right_antenna')
+        for (pixel of right_antenna){
+          pixel.classList.add('white_pixel')
+        }
+
+        reveal_3 = document.querySelector('#reveal_3')
+        upper_left = reveal_3.parentElement.parentElement.parentElement.querySelectorAll('.upper_left_body')
+        for (pixel of upper_left){
+          pixel.classList.add('white_pixel')
+        }
+
+        reveal_4 = document.querySelector('#reveal_4')
+        upper_right = reveal_4.parentElement.parentElement.parentElement.parentElement.querySelectorAll('.upper_right_body')
+        for (pixel of upper_right){
+          pixel.classList.add('white_pixel')
+        }
+
+        reveal_5 = document.querySelector('#reveal_5')
+        lower_left = reveal_5.parentElement.querySelectorAll('.lower_left_body')
+        for (pixel of lower_left){
+          pixel.classList.add('white_pixel')
+        }
+
+        reveal_6 = document.querySelector('#reveal_6')
+        lower_right = reveal_6.parentElement.querySelectorAll('.lower_right_body')
+        for (pixel of lower_right){
+          pixel.classList.add('white_pixel')
+        }
+
+        reveal_7 = document.querySelector('#reveal_7')
+        lower_left = reveal_5.parentElement.querySelectorAll('.lower_left_body')
+        for (pixel of lower_left){
+          pixel.classList.add('white_pixel')
+        }
       });
 
     </script>
