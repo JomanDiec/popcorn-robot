@@ -102,33 +102,39 @@
         }
 
         reveal_3 = document.querySelector('#reveal_3')
-        upper_left = reveal_3.parentElement.parentElement.parentElement.querySelectorAll('.upper_left_body')
+        upper_left = reveal_3.closest('.reveal_section').children
         for (pixel of upper_left){
-          pixel.classList.add('white_pixel')
+          body = pixel.querySelectorAll('.upper_left_body')
+          for (pix of body){
+            pix.classList.add('white_pixel')
+          }
         }
 
         reveal_4 = document.querySelector('#reveal_4')
-        upper_right = reveal_4.parentElement.parentElement.parentElement.parentElement.querySelectorAll('.upper_right_body')
+        upper_right = reveal_4.closest('#reveal_1').nextElementSibling.children
         for (pixel of upper_right){
-          pixel.classList.add('white_pixel')
+          body = pixel.querySelectorAll('.upper_right_body')
+          for (pix of body){
+            pix.classList.add('white_pixel')
+          }
         }
 
         reveal_5 = document.querySelector('#reveal_5')
         lower_left = reveal_5.parentElement.querySelectorAll('.lower_left_body')
         for (pixel of lower_left){
-          pixel.classList.add('white_pixel')
+          pixel.classList.add('black_pixel')
         }
 
         reveal_6 = document.querySelector('#reveal_6')
         lower_right = reveal_6.parentElement.querySelectorAll('.lower_right_body')
         for (pixel of lower_right){
-          pixel.classList.add('white_pixel')
+          pixel.classList.add('black_pixel')
         }
 
         reveal_7 = document.querySelector('#reveal_7')
         lower_left = reveal_5.parentElement.querySelectorAll('.lower_left_body')
         for (pixel of lower_left){
-          pixel.classList.add('white_pixel')
+          pixel.classList.add('black_pixel')
         }
       });
 
