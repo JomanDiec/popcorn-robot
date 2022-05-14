@@ -26,7 +26,6 @@
       document.addEventListener("DOMContentLoaded", () => {
 
         let pixel_1 = document.querySelector("#cap_pixel_1");
-        console.log(pixel_1);
         pixel_1.classList.add('green_pixel');
 
         let pict_1 = document.querySelector('#picture_1');
@@ -122,21 +121,75 @@
         reveal_5 = document.querySelector('#reveal_5')
         lower_left = reveal_5.parentElement.querySelectorAll('.lower_left_body')
         for (pixel of lower_left){
-          pixel.classList.add('black_pixel')
+          pixel.classList.add('white_pixel')
         }
 
         reveal_6 = document.querySelector('#reveal_6')
         lower_right = reveal_6.parentElement.querySelectorAll('.lower_right_body')
         for (pixel of lower_right){
-          pixel.classList.add('black_pixel')
+          pixel.classList.add('white_pixel')
         }
 
         reveal_7 = document.querySelector('#reveal_7')
-        lower_left = reveal_5.parentElement.querySelectorAll('.lower_left_body')
-        for (pixel of lower_left){
-          pixel.classList.add('black_pixel')
+        left_leg = reveal_7.closest('#picture_2').querySelectorAll('.left_leg')
+        for (pixel of left_leg){
+          pixel.classList.add('white_pixel')
         }
+
+        reveal_8 = document.querySelector('#reveal_8')
+        right_leg = reveal_8.querySelector('.right_leg')
+        right_leg.classList.add('white_pixel')
+        right_leg = reveal_8.previousElementSibling.querySelector('.right_leg')
+        right_leg.classList.add('white_pixel')
+
+        reveal_9 = document.querySelector('#reveal_9')
+        left_hand = reveal_9.parentElement.querySelectorAll('.left_hand')
+        for (pixel of left_hand){
+          pixel.classList.add('white_pixel')
+        }
+
+        reveal_10 = document.querySelector('#reveal_10')
+        right_hand = reveal_10.closest('.reveal_section').nextElementSibling.querySelectorAll('.right_hand') 
+        for (pixel of right_hand){
+          pixel.classList.add('white_pixel')
+        }
+
+        showMessage("stephanie", "joseph");
+
+        happyBirthday("arlene");
+        happyBirthday("nolan");
+
+        addition(2, 4);
+        addition(10, 5, 6);
+
       });
+
+      function showMessage(customer, greeter) {
+        console.log("hello " + customer + "!");
+        console.log("I'm " + greeter + ". How are you?");
+      }
+
+      function happyBirthday(name) {
+        console.log('happy birthday to you!');
+        console.log('happy birthday dear ' + name + '!')
+      }
+
+      function addition() {
+        var sum = 0;
+        for (var i = 0; i < arguments.length; i++) {
+          sum += arguments[i];
+        }
+        var numbers = "";
+        for (var i=0; i < arguments.length; i++) {
+          if (i < arguments.length-1){
+            comma = ',';
+          } else{
+            comma = '';
+          }
+          numbers += arguments[i] + comma ;
+        }
+        console.log('sum of ' + numbers + ' is ' + sum);
+      }
 
     </script>
   </head>
