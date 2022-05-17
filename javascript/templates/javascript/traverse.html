@@ -162,6 +162,9 @@
         addition(2, 4);
         addition(10, 5, 6);
 
+        multiplication(2, 4);
+        multiplication(10, 5);
+        multiplication(1, -6)
       });
 
       function showMessage(customer, greeter) {
@@ -189,6 +192,36 @@
           numbers += arguments[i] + comma ;
         }
         console.log('sum of ' + numbers + ' is ' + sum);
+      }
+
+      function multiplication() {
+        var product = 1;
+        for (var i = 0; i < arguments.length; i++) {
+          product *= arguments[i];
+        }
+        var numbers = "";
+        for (var i=0; i < arguments.length; i++) {
+          if (i < arguments.length-1){
+            comma = ',';
+          } else{
+            comma = '';
+          }
+          numbers += arguments[i] + comma ;
+        }
+        
+        var check = true;
+        for (var i = 0; i < arguments.length; i++) {
+          if (arguments[i] < 0){
+            check = false;
+            break;
+          }
+          }
+
+        if (check == true) {
+          console.log('product of ' + numbers + ' is ' + product);
+        } else {
+          console.log('Error: Both numbers must be positive integers!');
+        }
       }
 
     </script>
