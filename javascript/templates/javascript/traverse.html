@@ -162,9 +162,27 @@
         addition(2, 4);
         addition(10, 5, 6);
 
-        multiplication(2, 4);
-        multiplication(10, 5);
-        multiplication(1, -6)
+        let result = multiplication(2, 4);
+        console.log(result + ' result');
+        result = multiplication(10, 5);
+        console.log(result + ' result');
+        result = multiplication(1, -6);
+        console.log(result + ' result');
+
+        result = subtraction(6, 2);
+        console.log("Difference: " + result);
+        result = subtraction(10, 7);
+        console.log("Difference: " + result);
+
+        let temperature = convertToCelsius(50);
+        console.log("Temperature in celsius: " + temperature);
+        temperature = convertToCelsius(95);
+        console.log("Temperature in celsius: " + temperature);
+
+        let average = computeAverage([5, 10, 15]);
+        console.log("Average: " + average);
+        average = computeAverage([9, 5, 75, 42, 9]);
+        console.log("Average: " + average);
       });
 
       function showMessage(customer, greeter) {
@@ -222,6 +240,52 @@
         } else {
           console.log('Error: Both numbers must be positive integers!');
         }
+
+        return (numbers + ' ' + product)
+      }
+
+      function subtraction(){
+        var difference = arguments[0];
+        for (var i = 1; i < arguments.length; i++) {
+          difference -= arguments[i];
+        }
+        var numbers = "";
+        for (var i=0; i < arguments.length; i++) {
+          if (i < arguments.length-1){
+            comma = ',';
+          } else{
+            comma = '';
+          }
+          numbers += arguments[i] + comma ;
+        }
+        
+        return (numbers + '=' + difference)
+      }
+
+      function convertToCelsius(fahrenheit) {
+        celsius = (fahrenheit-32)*(5/9)
+
+        return(celsius)
+      }
+
+      function computeAverage(numbers){
+        var sum = 0;
+        for (var i = 0; i < numbers.length; i++) {
+          sum += numbers[i];
+        }
+        var mean = sum/numbers.length
+        {% comment %} below code not being used. function for outputing number sets {% endcomment %}
+        var set = "";
+        for (var i=0; i < numbers.length; i++) {
+          if (i < numbers.length-1){
+            comma = ',';
+          } else{
+            comma = '';
+          }
+          set += numbers[i] + comma ;
+        }
+
+        return(mean)
       }
 
     </script>
