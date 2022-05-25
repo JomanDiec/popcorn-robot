@@ -183,6 +183,12 @@
         console.log("Average: " + average);
         average = computeAverage([9, 5, 75, 42, 9]);
         console.log("Average: " + average);
+
+        // select button element
+        let element = document.querySelector("#my_btn");
+
+        // attach click event to myFunction()
+        element.addEventListener("click", myFourthFunction);
       });
 
       function showMessage(customer, greeter) {
@@ -288,12 +294,34 @@
         return(mean)
       }
 
+      function myFunction() {
+        alert ("Hello World!");
+      }
+
+      function mySecondFunction() {
+        console.log ("Hello World.");
+        console.log ("Changed event handler success!");
+      }
+
+      function myThirdFunction() {
+        console.log("Third event handler success!");
+        let my_h1 = document.querySelector('#my_h1');
+        my_h1.style.backgroundColor = "red"
+      }
+
+      function myFourthFunction() {
+        console.log(document.getElementById('my_text').value);
+      }
+
     </script>
   </head>
 
   <body>
 
-
+<!-- Our HTML --> 
+<h1 id="my_h1">Event exercises!</h1>
+<input type="text" id="my_text" >
+<button id="my_btn" type="button" class="btn btn-primary">Click me!</button>
 
     <div class="container">
 
