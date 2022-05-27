@@ -25,6 +25,8 @@
             // Page load event
       document.addEventListener("DOMContentLoaded", () => {
 
+        console.log("Stay classy, planet Earth.")
+
         let pixel_1 = document.querySelector("#cap_pixel_1");
         pixel_1.classList.add('green_pixel');
 
@@ -189,6 +191,29 @@
 
         // attach click event to myFunction()
         element.addEventListener("click", myFourthFunction);
+
+        let headline = document.querySelector("#my_h1");
+        let blue_btn = document.querySelector('#blue_btn');
+        blue_btn.addEventListener("click", () => {
+          console.log('turn blue!')
+          headline.style.color = "blue"
+        });
+
+        let headline_btn = document.querySelector('#headline_btn');
+        
+        headline_btn.addEventListener('click', () => {
+          let headline_txt = document.getElementById('headline_text').value;
+          console.log('change headline!');
+          headline.textContent = headline_txt
+        })
+
+        let sum_btn = 
+        sum_btn.addEventListener('click', () => {
+          let headline_txt = document.getElementById('headline_text').value;
+          console.log('change headline!');
+          headline.textContent = headline_txt
+        })
+
       });
 
       function showMessage(customer, greeter) {
@@ -313,6 +338,7 @@
         console.log(document.getElementById('my_text').value);
       }
 
+
     </script>
   </head>
 
@@ -320,8 +346,19 @@
 
 <!-- Our HTML --> 
 <h1 id="my_h1">Event exercises!</h1>
+<button id="blue_btn" type="button" class="btn btn-primary">Turn Blue</button>
+<br>
+<input type="text" id="headline_text" >
+<button id="headline_btn" type="button" class="btn btn-primary">Change headline</button>
+<br>
 <input type="text" id="my_text" >
-<button id="my_btn" type="button" class="btn btn-primary">Click me!</button>
+<button id="my_btn" type="button" class="btn btn-primary">console me!</button>
+<br>
+<input type="text" id="number_1" >
+<input type="text" id="number_2" >
+<button id="sum_btn" type="button" class="btn btn-primary">Math me!</button>
+
+
 
     <div class="container">
 
