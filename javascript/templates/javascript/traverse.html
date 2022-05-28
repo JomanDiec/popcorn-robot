@@ -204,14 +204,41 @@
         headline_btn.addEventListener('click', () => {
           let headline_txt = document.getElementById('headline_text').value;
           console.log('change headline!');
+          {% comment %} headline is variable declared in blue_btn function {% endcomment %}
           headline.textContent = headline_txt
         })
 
-        let sum_btn = 
+        let sum_btn = document.querySelector('#sum_btn');
         sum_btn.addEventListener('click', () => {
-          let headline_txt = document.getElementById('headline_text').value;
-          console.log('change headline!');
-          headline.textContent = headline_txt
+          number_1 = document.getElementById('number_1').value;
+          number_2 = document.getElementById('number_2').value;
+          console.log('sum the headline!');
+          {% comment %} headline is variable declared in blue_btn function {% endcomment %}
+          headline.textContent = Number(number_1) + Number(number_2);
+        })
+
+        let color_btn = document.querySelector('#color_btn');
+        color_btn.addEventListener("click", () => {
+          console.log('change headline color again!')
+          headline_color = document.getElementById('headline_color').value;
+          {% comment %} headline is variable declared in blue_btn function {% endcomment %}
+          headline.style.color = headline_color;
+        });
+
+        let product_btn = document.querySelector('#product_btn');
+        let headline2 = document.querySelector('#my_h2');
+        product_btn.addEventListener('click', () => {
+          factor_1 = document.getElementById('factor_1').value;
+          factor_2 = document.getElementById('factor_2').value;
+          console.log('multiply the other headline!');
+          if (isNaN(factor_1) || isNaN(factor_2) || factor_1=='' || factor_2 == ''){
+            console.log('false condition')
+            headline2.textContent ='Error: Both textboxes must have a numeric value!'
+          } else{
+            console.log('true condition')
+            headline2.textContent = 'Product: ' + (Number(factor_1) * Number(factor_2));
+          }
+          
         })
 
       });
@@ -357,6 +384,14 @@
 <input type="text" id="number_1" >
 <input type="text" id="number_2" >
 <button id="sum_btn" type="button" class="btn btn-primary">Math me!</button>
+<br>
+<input type="text" id="headline_color" >
+<button id="color_btn" type="button" class="btn btn-primary">Change headline color</button>
+<br>
+<h3 id='my_h2'>Product: </h3>
+<input type="text" id="factor_1" >
+<input type="text" id="factor_2" >
+<button id="product_btn" type="button" class="btn btn-primary">Multiply!</button>
 
 
 
