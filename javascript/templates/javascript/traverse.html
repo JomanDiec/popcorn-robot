@@ -19,11 +19,25 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<style>
+  body {
+    padding: 25px;
+    background-color: white;
+    color: black;
+    font-size: 25px;
+  }
+  
+  .dark-mode {
+    background-color: Teal;
+    color: black;
+  }
+</style>
     <script>
       // Script tag #2
             // Page load event
       document.addEventListener("DOMContentLoaded", () => {
+
+        document.body.classList.toggle('dark-mode');
 
         console.log("Stay classy, planet Earth.")
 
@@ -237,9 +251,15 @@
           } else{
             console.log('true condition')
             headline2.textContent = 'Product: ' + (Number(factor_1) * Number(factor_2));
-          }
-          
+          }         
         })
+
+        let mouse_color = document.querySelector('#mouse_color');
+        let mouse_headline = document.querySelector('#my_h3');
+        mouse_color.addEventListener("mouseover", function( event ) {
+          badge_color = event.target.innerText;
+          mouse_headline.style.color = badge_color;
+      });
 
       });
 
@@ -392,7 +412,11 @@
 <input type="text" id="factor_1" >
 <input type="text" id="factor_2" >
 <button id="product_btn" type="button" class="btn btn-primary">Multiply!</button>
-
+<br>
+<h3 id='my_h3'>Mouseover Color Changer</h3>
+<div id='mouse_color'>
+<span class="badge">green</span> <span class="badge">red</span> <span class="badge">yellow</span> <span class="badge">chartreuse</span>
+</div>
 
 
     <div class="container">
