@@ -32,9 +32,12 @@
     color: black;
   }
 </style>
+
     <script>
       // Script tag #2
             // Page load event
+      let x = 4;  // global variable
+
       document.addEventListener("DOMContentLoaded", () => {
 
         document.body.classList.toggle('dark-mode');
@@ -261,7 +264,54 @@
           mouse_headline.style.color = badge_color;
       });
 
+        console.log(x);
+
+      
+        addOne();
+        console.log(x);
+  
+        
+        printNum();
+        console.log(y);
+
+        let counter_btn = document.getElementById('counter_btn');
+        let counter_value = 0;
+        let counter = document.getElementById('counter');
+        counter_btn.addEventListener('click', () =>{
+          console.log('counter + 1');
+          counter_value += 1;
+          counter.textContent = counter_value;
+        });
+
+        let rps_btn = document.getElementById('rps_btn');
+        const rps_array = ['rock', 'paper', 'scissor'];
+        let rps_result = document.getElementById('rps_result');
+        rps_btn.addEventListener('click', () => {
+          comp_rps = rps_array[Math.floor(Math.random() * rps_array.length)];
+          console.log(comp_rps);
+          player_rps = document.getElementById('player_rps').value;
+          console.log(player_rps);
+          if (comp_rps == player_rps){
+            rps_result.textContent = 'Result: Tie! Computer played ' + comp_rps;
+          } else if((comp_rps == 'rock' && player_rps == 'paper') || (comp_rps == 'scissor' && player_rps == 'rock') || (comp_rps == 'paper' && player_rps == 'scissor')){
+            rps_result.textContent = 'Result: You Win! Computer played ' + comp_rps;
+          } else if ((comp_rps == 'rock' && player_rps == 'scissor') || (comp_rps == 'scissor' && player_rps == 'paper') || (comp_rps == 'paper' && player_rps == 'rock')){
+            rps_result.textContent = 'Result: You Lose! Computer played ' + comp_rps;
+          } else {
+            rps_result.textContent = 'Error, please enter rock, paper, or scissor';
+          }
+        })
+        
       });
+
+      function addOne() {
+          x += 1;
+      }
+
+      let y = '';
+      function printNum() {
+        y = 5;  // local variable
+      }
 
       function showMessage(customer, greeter) {
         console.log("hello " + customer + "!");
@@ -417,7 +467,12 @@
 <div id='mouse_color'>
 <span class="badge">green</span> <span class="badge">red</span> <span class="badge">yellow</span> <span class="badge">chartreuse</span>
 </div>
+<h3>Counter: <span id='counter'>0</span></h3>
+<button id="counter_btn" type="button" class="btn btn-primary">Add One</button>
 
+<h3>Rock, Paper, Scissor v1</h3>
+<h4 id='rps_result'>Enter rock, paper, or scissor</h4>
+<input type="text" id="player_rps" ><button id="rps_btn" type="button" class="btn btn-primary">Play!</button>
 
     <div class="container">
 
