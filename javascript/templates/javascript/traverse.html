@@ -300,8 +300,35 @@
           } else {
             rps_result.textContent = 'Error, please enter rock, paper, or scissor';
           }
-        })
+        });
         
+        let progress_btn = document.getElementById('progress_btn');
+        let progress_bar = document.getElementById('progress_bar');
+        let xp_gain = document.getElementById('xp_gain');
+        let progress_lvl = document.getElementById('progress_lvl');
+        let xp_display = document.getElementById('current_xp');
+        let current_xp = 0;
+        let current_lvl = 1;
+        progress_btn.addEventListener('click', () => {
+          let min = Math.ceil(25);
+          let max = Math.floor(35);
+          let xp_points = Math.floor(Math.random() * (max - min + 1)) + min;
+          console.log(xp_points);
+          current_xp += xp_points;
+          if (current_xp < 100){
+            xp_gain.innerHTML = '+' + xp_points + ' xp' + (xp_points >= 30 ? ' Great Job!' : '');
+            } else {
+            current_lvl += 1;
+            console.log('current level: ' + current_lvl);
+            current_xp = 0;
+            progress_lvl.innerHTML = '<em>Level ' + current_lvl + '</em>';
+            xp_gain.innerHTML = '+' + xp_points + ' xp Level up!'
+          }
+          progress_bar.style['width'] = current_xp + '%'
+          xp_display.innerHTML = current_xp + '% Complete'
+          console.log('current xp: ' + current_xp);
+        });
+
       });
 
       function addOne() {
@@ -476,9 +503,12 @@
 
 <div class="container">
   <h2>Click Game</h2>
+    <h4 style= "display:inline-block" id = 'progress_lvl'><em>Level 1</em></h4>
+    <h4 style="float: right; display:inline-block" id = 'xp_gain'></h4>
+<br>
   <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-      <span class="sr-only">30% Complete</span>
+    <div id='progress_bar' class="progress-bar" style="width:0%">
+      <span id= 'current_xp'>30% Complete</span>
     </div>
   </div>
   <button id="progress_btn" type="button" class="btn btn-primary">Play!</button>
