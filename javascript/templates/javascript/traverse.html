@@ -329,6 +329,39 @@
           console.log('current xp: ' + current_xp);
         });
 
+        let win_counter = document.getElementById('win_counter');
+        let lose_counter = document.getElementById('lose_counter');
+        let tie_counter = document.getElementById('tie_counter');
+        let win_score = 0;
+        let lose_score = 0;
+        let tie_score = 0;
+        document.addEventListener('click', function (event) {
+          if ( event.target.classList.contains( 'rps-function' ) ) {
+            player_rps = event.target.innerHTML
+            console.log('player plays ' + player_rps)
+            comp_rps = rps_array[Math.floor(Math.random() * rps_array.length)]
+            console.log('computer plays ' + comp_rps)
+            if (comp_rps == player_rps){
+              rpsv2_result.textContent = 'Result: Tie! Computer played ' + comp_rps;
+              tie_score += 1;
+              tie_counter.innerHTML = '<em>Ties: </em>' + tie_score;
+            } else if((comp_rps == 'rock' && player_rps == 'paper') || (comp_rps == 'scissor' && player_rps == 'rock') || (comp_rps == 'paper' && player_rps == 'scissor')){
+              rpsv2_result.textContent = 'Result: You Win! Computer played ' + comp_rps;
+              win_score += 1;
+              win_counter.innerHTML = '<em>Wins: </em>' + win_score;
+            } else if ((comp_rps == 'rock' && player_rps == 'scissor') || (comp_rps == 'scissor' && player_rps == 'paper') || (comp_rps == 'paper' && player_rps == 'rock')){
+              rpsv2_result.textContent = 'Result: You Lose! Computer played ' + comp_rps;
+              lose_score += 1;
+              lose_counter.innerHTML = '<em>Losses: </em>' + lose_score;
+              //unused code copied from other rps eventlistener
+            {% comment %} } else {
+              rps_result.textContent = 'Error, please enter rock, paper, or scissor'; {% endcomment %}
+            }
+          }
+      }, false);
+
+
+
       });
 
       function addOne() {
@@ -513,6 +546,16 @@
   </div>
   <button id="progress_btn" type="button" class="btn btn-primary">Play!</button>
 </div>
+<br>
+<h2>Rock, Paper, Scissor v2</h2>
+<h4 id='rpsv2_result'>Click rock, paper, or scissor</h4>
+<h4 style= "display:inline-block" id = 'win_counter'><em>Wins: </em>0</h4>
+<h4 style= "display:inline-block" id = 'lose_counter'><em>Losses: </em>0</h4>
+<h4 style= "display:inline-block" id = 'tie_counter'><em>Ties: </em>0</h4>
+<br>
+<button id="rock_btn" type="button" class="btn btn-primary ; rps-function">rock</button>
+<button id="paper_btn" type="button" class="btn btn-primary ; rps-function" style='background-color:green'>paper</button>
+<button id="scissor_btn" type="button" class="btn btn-primary ; rps-function" style='background-color:grey'>scissor</button>
 
     <div class="container">
 
