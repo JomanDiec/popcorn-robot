@@ -38,6 +38,18 @@
             // Page load event
       let x = 4;  // global variable
 
+      const RPS_RESULTS = {
+        tie : 'tie',
+        win : 'win',
+        lose : 'lose'
+      }
+
+      const RPS = {
+        rock : 'rock',
+        paper : 'paper',
+        scissor : 'scissor'
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
 
         document.body.classList.toggle('dark-mode');
@@ -283,23 +295,38 @@
           counter.textContent = counter_value;
         });
 
+
         let rps_btn = document.getElementById('rps_btn');
-        const rps_array = ['rock', 'paper', 'scissor'];
         let rps_result = document.getElementById('rps_result');
         rps_btn.addEventListener('click', () => {
-          comp_rps = rps_array[Math.floor(Math.random() * rps_array.length)];
+          player_rps = document.getElementById('player_rps').value;
+          result = playRPS(player_rps);
+          console.log(result)
+          if (result == RPS_RESULTS.tie){
+            rps_result.textContent = 'Result: Tie! Computer played ' + comp_rps;
+          } else if(result == RPS_RESULTS.win){
+            rps_result.textContent = 'Result: You Win! Computer played ' + comp_rps;
+          } else if (result == RPS_RESULTS.lose){
+            rps_result.textContent = 'Result: You Lose! Computer played ' + comp_rps;
+          } else {
+            rps_result.textContent = 'Error, please enter rock, paper, or scissor';
+          }
+          
+          //unfactored code
+          {% comment %} comp_rps = RPS_array[Math.floor(Math.random() * RPS_array.length)];
+          console.log(RPS_array);          
           console.log(comp_rps);
           player_rps = document.getElementById('player_rps').value;
           console.log(player_rps);
           if (comp_rps == player_rps){
             rps_result.textContent = 'Result: Tie! Computer played ' + comp_rps;
-          } else if((comp_rps == 'rock' && player_rps == 'paper') || (comp_rps == 'scissor' && player_rps == 'rock') || (comp_rps == 'paper' && player_rps == 'scissor')){
+          } else if((comp_rps == RPS.rock && player_rps == RPS.paper) || (comp_rps == RPS.scissor && player_rps == RPS.rock) || (comp_rps == RPS.paper && player_rps == RPS.scissor)){
             rps_result.textContent = 'Result: You Win! Computer played ' + comp_rps;
-          } else if ((comp_rps == 'rock' && player_rps == 'scissor') || (comp_rps == 'scissor' && player_rps == 'paper') || (comp_rps == 'paper' && player_rps == 'rock')){
+          } else if ((comp_rps == RPS.rock && player_rps == RPS.scissor) || (comp_rps == RPS.scissor && player_rps == RPS.paper) || (comp_rps == RPS.paper && player_rps == RPS.rock)){
             rps_result.textContent = 'Result: You Lose! Computer played ' + comp_rps;
           } else {
             rps_result.textContent = 'Error, please enter rock, paper, or scissor';
-          }
+          } {% endcomment %}
         });
         
         let progress_btn = document.getElementById('progress_btn');
@@ -338,7 +365,23 @@
         document.addEventListener('click', function (event) {
           if ( event.target.classList.contains( 'rps-function' ) ) {
             player_rps = event.target.innerHTML
-            console.log('player plays ' + player_rps)
+            result = playRPS(player_rps);
+            if (result == RPS_RESULTS.tie){
+              rpsv2_result.textContent = 'Result: Tie! Computer played ' + comp_rps;
+              tie_score += 1;
+              tie_counter.innerHTML = '<em>Ties: </em>' + tie_score;
+            } else if(result == RPS_RESULTS.win){
+              rpsv2_result.textContent = 'Result: You Win! Computer played ' + comp_rps;
+              win_score += 1;
+              win_counter.innerHTML = '<em>Wins: </em>' + win_score;
+            } else if (result == RPS_RESULTS.lose){
+              rpsv2_result.textContent = 'Result: You Lose! Computer played ' + comp_rps;
+              lose_score += 1;
+              lose_counter.innerHTML = '<em>Losses: </em>' + lose_score;
+            } 
+            //unrefactored code
+            {% comment %} console.log('player plays ' + player_rps)
+            rps_array = Object.keys(RPS);
             comp_rps = rps_array[Math.floor(Math.random() * rps_array.length)]
             console.log('computer plays ' + comp_rps)
             if (comp_rps == player_rps){
@@ -353,16 +396,29 @@
               rpsv2_result.textContent = 'Result: You Lose! Computer played ' + comp_rps;
               lose_score += 1;
               lose_counter.innerHTML = '<em>Losses: </em>' + lose_score;
-              //unused code copied from other rps eventlistener
-            {% comment %} } else {
-              rps_result.textContent = 'Error, please enter rock, paper, or scissor'; {% endcomment %}
-            }
+            } {% endcomment %}
           }
       }, false);
 
 
 
       });
+
+      function playRPS(player) {
+        RPS_array = Object.keys(RPS);
+        console.log(RPS_array);
+        //randomly generates rock, paper, or scissor
+        comp_rps = RPS_array[Math.floor(Math.random() * RPS_array.length)];
+        console.log(comp_rps);
+        console.log(player_rps);
+        if (comp_rps == player){
+          return RPS_RESULTS.tie;
+        } else if((comp_rps == RPS.rock && player == RPS.paper) || (comp_rps == RPS.scissor && player == RPS.rock) || (comp_rps == RPS.paper && player == RPS.scissor)){
+          return RPS_RESULTS.win;
+        } else if ((comp_rps == RPS.rock && player == RPS.scissor) || (comp_rps == RPS.scissor && player == RPS.paper) || (comp_rps == RPS.paper && player == RPS.rock)){
+          return RPS_RESULTS.lose;
+        }
+      }
 
       function addOne() {
           x += 1;
