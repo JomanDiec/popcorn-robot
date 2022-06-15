@@ -400,14 +400,13 @@
           }
       }, false);
 
-      call_var = callVariable();
-      console.log(call_V);
+      let guess_number_btn = document.getElementById('guess_number_btn');
+      guess_number_btn.addEventListener('click', guessNumber(), false);
 
-      });
+    });
 
-      function callVariable(){
-        call_V = 'This is getting called from inisde the function!';
-        return call_V;
+      function guessNumber(){
+
       }
 
       function playRPS(player) {
@@ -618,6 +617,15 @@
 <button id="rock_btn" type="button" class="btn btn-primary ; rps-function">rock</button>
 <button id="paper_btn" type="button" class="btn btn-primary ; rps-function" style='background-color:green'>paper</button>
 <button id="scissor_btn" type="button" class="btn btn-primary ; rps-function" style='background-color:grey'>scissor</button>
+
+<h2>Guess the Secret Number</h2>
+<h4>Guess the number between 1 and 75</h4>
+
+<h3>7 Chances Left!</h3>
+<input type="number" placeholder='Guess here' id="guess_number" min="1" max="75"> <button id="guess_number_btn" type="button" class="btn btn-primary">Guess</button>
+<br>
+<h4 id='guess_result'></h4>
+<button id="blue_btn" type="button" class="btn btn-warning">Start Over</button>
 
     <div class="container">
 
