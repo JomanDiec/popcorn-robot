@@ -313,7 +313,7 @@
           }
           
           //unfactored code
-          {% comment %} comp_rps = RPS_array[Math.floor(Math.random() * RPS_array.length)];
+          {% comment %} //comp_rps = RPS_array[Math.floor(Math.random() * RPS_array.length)];
           console.log(RPS_array);          
           console.log(comp_rps);
           player_rps = document.getElementById('player_rps').value;
@@ -382,7 +382,7 @@
             //unrefactored code
             {% comment %} console.log('player plays ' + player_rps)
             rps_array = Object.keys(RPS);
-            comp_rps = rps_array[Math.floor(Math.random() * rps_array.length)]
+            //comp_rps = rps_array[Math.floor(Math.random() * rps_array.length)]
             console.log('computer plays ' + comp_rps)
             if (comp_rps == player_rps){
               rpsv2_result.textContent = 'Result: Tie! Computer played ' + comp_rps;
@@ -400,9 +400,15 @@
           }
       }, false);
 
-
+      call_var = callVariable();
+      console.log(call_V);
 
       });
+
+      function callVariable(){
+        call_V = 'This is getting called from inisde the function!';
+        return call_V;
+      }
 
       function playRPS(player) {
         RPS_array = Object.keys(RPS);
