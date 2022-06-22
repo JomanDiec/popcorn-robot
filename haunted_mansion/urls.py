@@ -3,12 +3,9 @@ from django.urls import re_path as url
 
 from . import views
 
-app_name = 'javascript'
-
+app_name = 'haunted_mansion'
 
 urlpatterns = [
-    # add new capture here
-    path('traverse', views.traverse, name='traverse'),
+    path('', views.index, name='index'),
     path('haunted_mansion', views.haunted_mansion, name='haunted_mansion'),
-    
 ]

@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('ask_it.urls')),
     path('', include('exercises.urls')),
     path('', include('javascript.urls')),
+    path('', include('haunted_mansion.urls')),
     path('admin/', admin.site.urls),    
 ]
 

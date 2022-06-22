@@ -402,7 +402,9 @@
 
       let guess_number_btn = document.getElementById('guess_number_btn');
       let guess_value = document.getElementById('guess_value');
-      guess_result = document.getElementById('guess_result');
+      let guess_result = document.getElementById('guess_result');
+      let tries_left_txt = document.getElementById('tries_left');
+      let start_over_btn = document.getElementById('start_over_btn');
       guess_number_btn.addEventListener('click', () => {
         console.log('click guesser')
         guessNumber(guess_value.value)
@@ -413,23 +415,50 @@
           guessNumber(guess_value.value)
         }
       });
+      start_over_btn.addEventListener('click', () => {
+        answer = Math.floor(Math.random() * (max - min + 1)) + min;
+        tries_left = 7;
+        tries_left_txt.innerHTML = tries_left + ' tries left';
+        guess_result.innerHTML = '';
+        console.log('game reset, new number is ' + answer);
+      });
     });
 
+
+      let min = Math.ceil(1);
+      let max = Math.floor(75);
+      let tries_left = 7;
+      let answer = Math.floor(Math.random() * (max - min + 1)) + min;
       function guessNumber(guess){
-        let min = Math.ceil(1);
-        let max = Math.floor(75);
-        let answer = Math.floor(Math.random() * (max - min + 1)) + min;
+        let tries_left_txt = document.getElementById('tries_left');
         console.log(answer);
-        for (let i = 0; i < 7; i++){
+        if (tries_left > 1){
           if (guess < answer){
             console.log('too low')
             guess_result.innerHTML = 'You guessed ' + guess + ', but the number is higher!';
+            tries_left -= 1;
+            console.log(tries_left + ' tries left')
+            tries_left_txt.innerHTML = tries_left + ' tries left';
           } else if (guess > answer){
             console.log('too high')
             guess_result.innerHTML = 'You guessed ' + guess + ', but the number is lower!';
+            tries_left -= 1;
+            console.log(tries_left + ' tries left')
+            tries_left_txt.innerHTML = tries_left + ' tries left';
+          } else {
+            console.log('Bingo!');
+            guess_result.innerHTML = 'Winner winner chicken dinner! ' + answer + ' is the number! You succeeded in ' + tries_left + ' tries. Game restarted. Play again!';
+            answer = Math.floor(Math.random() * (max - min + 1)) + min;
+            tries_left = 7;
+            tries_left_txt.innerHTML = tries_left + ' tries left';
           }
-          }
+        } else {
+          alert('you lose! The number was ' + answer + '. Game reset')
+          answer = Math.floor(Math.random() * (max - min + 1)) + min;
+          tries_left = 7;
+          tries_left_txt.innerHTML = tries_left + ' tries left';
         }
+      }
       
 
       function playRPS(player) {
@@ -644,7 +673,7 @@
 <h2>Guess the Secret Number</h2>
 <h4>Guess the number between 1 and 75</h4>
 
-<h3 id='chances_left'>7 Chances Left!</h3>
+<h3 id='tries_left'>7 Chances Left!</h3>
 <input type="number" placeholder='Guess here' id="guess_value" min="1" max="75"> <button id="guess_number_btn" type="button" class="btn btn-primary">Guess</button>
 <br>
 <h4 id='guess_result'></h4>
