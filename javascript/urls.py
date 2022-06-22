@@ -5,9 +5,7 @@ from . import views
 
 app_name = 'javascript'
 
-
 urlpatterns = [
-    # add new capture here
     path('traverse', views.traverse, name='traverse'),
     path('haunted_mansion', views.haunted_mansion, name='haunted_mansion'),
     

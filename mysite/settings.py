@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'exercises.apps.ExercisesConfig',
     'ask_it.apps.Ask_itConfig',
     'javascript.apps.JavascriptConfig',
+    'haunted_mansion.apps.HauntedMansionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
