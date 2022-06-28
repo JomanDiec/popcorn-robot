@@ -7,4 +7,6 @@ def index(request):
 
 def haunted_mansion(request):
 
-    return render(request,'haunted_mansion/haunted_mansion.html')
+    # return HttpResponse('haunted mansion')
+
+    return render(request,'haunted_mansion.html')

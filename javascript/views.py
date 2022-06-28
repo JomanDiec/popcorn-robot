@@ -5,6 +5,6 @@ def traverse(request):
 
     return render(request,'javascript/traverse.html')
 
-def haunted_mansion(request):
+# def haunted_mansion(request):
 
-    return render(request,'javascript/haunted_mansion.html')
+#     return render(request,'javascript/haunted_mansion.html')
