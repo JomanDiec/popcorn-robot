@@ -1,8 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      let leave_btn = document.getElementById('leave_btn');
+      let start = document.getElementById('start');
+      let game_over = document.getElementById('game_over');
+      leave_btn.addEventListener('click', () => {
+        console.log('hide start and show game over screen')
+        start.collapse('hide');
+        game_over.collapse('show');
+      });
+
+    })
+  </script>
 </head>
+
+<body>
+  <h1>Haunted Mansion</h1>
+  <div id='start' class='collapse in'>
+  <img src='{% static "img/haunted_mansion.jpg" %}' alt="Haunted Mansion" height="600"/>
+  <p>You're walking in the forest with your dog, Romeo, when you come across a strange house. Romeo starts getting aggressive and bolts into the house.<br>
+
+    You chase after him, but stop at the front door.</p>
+    <button id="enter_house" type="button" class="btn btn-primary">Enter House</button>
+    <button id="leave_btn" type="button" class="btn btn-primary">Leave</button>
+  </div>
+
+  <div id='game_over' class='collapse'>
+    <img src='{% static "img/you_lose.gif" %}' alt="you_lose" height="600"/>
+    <button id="start_over" type="button" class="btn btn-primary">Start Over</button>
+  </div>
+</body>
+</html>
