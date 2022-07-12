@@ -11,12 +11,18 @@
     document.addEventListener('DOMContentLoaded', () => {
       
       let leave_btn = document.getElementById('leave_btn');
-      let start = document.getElementById('start');
+      let start_page = document.getElementById('start_page');
       let game_over = document.getElementById('game_over');
       leave_btn.addEventListener('click', () => {
         console.log('hide start and show game over screen')
-        start.collapse('hide');
-        game_over.collapse('show');
+        start_page.style.display = 'none';
+        game_over.style.display = 'block';
+      });
+
+      let start_over_btn = document.getElementById('start_over');
+      start_over_btn.addEventListener('click' , () => {
+        start_page.style.display = 'block';
+        game_over.style.display = 'none';
       });
 
     })
@@ -25,7 +31,7 @@
 
 <body>
   <h1>Haunted Mansion</h1>
-  <div id='start' class='collapse in'>
+  <div id='start_page' class='collapse in'>
   <img src='{% static "img/haunted_mansion.jpg" %}' alt="Haunted Mansion" height="600"/>
   <p>You're walking in the forest with your dog, Romeo, when you come across a strange house. Romeo starts getting aggressive and bolts into the house.<br>
 
@@ -36,6 +42,7 @@
 
   <div id='game_over' class='collapse'>
     <img src='{% static "img/you_lose.gif" %}' alt="you_lose" height="600"/>
+    <br>
     <button id="start_over" type="button" class="btn btn-primary">Start Over</button>
   </div>
 </body>
