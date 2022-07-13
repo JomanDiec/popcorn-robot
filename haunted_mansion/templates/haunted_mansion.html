@@ -10,40 +10,109 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       
-      let leave_btn = document.getElementById('leave_btn');
+      //Start page
       let start_page = document.getElementById('start_page');
-      let game_over = document.getElementById('game_over');
+      let enter_house_btn = document.getElementById('enter_house_btn');
+      let leave_btn = document.getElementById('leave_btn');
+
+      //start page enter house button
+      let grand_hall = document.getElementById('grand_hall');
+      enter_house_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, start_page);
+        //grand_hall.style.display = 'block';
+        //start_page.style.display = 'none';
+      });
+
+      //start page leave button
       leave_btn.addEventListener('click', () => {
         console.log('hide start and show game over screen')
-        start_page.style.display = 'none';
-        game_over.style.display = 'block';
+        showHideRoom(game_over, start_page);
+        //start_page.style.display = 'none';
+        //game_over.style.display = 'block';
       });
 
+      //Game over page
+      let game_over = document.getElementById('game_over');
       let start_over_btn = document.getElementById('start_over');
+      
+      //game over page start over button
       start_over_btn.addEventListener('click' , () => {
-        start_page.style.display = 'block';
-        game_over.style.display = 'none';
+        showHideRoom(start_page, game_over);
+        //start_page.style.display = 'block';
+        //game_over.style.display = 'none';
       });
 
-    })
+
+      //grand hall page
+      let front_door_btn = document.getElementById('front_door_btn');
+      let living_room_btn = document.getElementById('living_room_btn');
+      let bedroom_btn = document.getElementById('bedroom_btn');
+      let library_btn = document.getElementById('library_btn');
+      let dining_room_btn = document.getElementById('dining_room_btn');
+
+      let front_door = document.getElementById('front_door');
+      front_door_btn.addEventListener('click' , () => {
+        showHideRoom(front_door, grand_hall);
+        //front_door.style.display = 'block';
+        //grand_hall.style.display = 'none';
+      });
+
+      //front door page
+      let front_grand_hall_btn = document.getElementById('front_grand_hall_btn');
+      front_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, front_door);
+      });
+
+
+
+    });
+
+    //function for switching between rooms
+    function showHideRoom(show_room, hide_room) {
+      show_room.style.display = 'block';
+      hide_room.style.display = 'none';
+    }
   </script>
 </head>
 
 <body>
   <h1>Haunted Mansion</h1>
-  <div id='start_page' class='collapse in'>
+  
+  <div id='start_page'>
   <img src='{% static "img/haunted_mansion.jpg" %}' alt="Haunted Mansion" height="600"/>
   <p>You're walking in the forest with your dog, Romeo, when you come across a strange house. Romeo starts getting aggressive and bolts into the house.<br>
 
     You chase after him, but stop at the front door.</p>
-    <button id="enter_house" type="button" class="btn btn-primary">Enter House</button>
+    <button id="enter_house_btn" type="button" class="btn btn-primary">Enter House</button>
     <button id="leave_btn" type="button" class="btn btn-primary">Leave</button>
   </div>
 
-  <div id='game_over' class='collapse'>
-    <img src='{% static "img/you_lose.gif" %}' alt="you_lose" height="600"/>
+  <div id='game_over' style='display:none'>
+    <img src='{% static "img/you_lose.gif" %}' alt="you lose" height="600"/>
+    <p>You leave and never see Romeo again. You lose.</p>
     <br>
     <button id="start_over" type="button" class="btn btn-primary">Start Over</button>
   </div>
+
+  <div id='grand_hall' style='display:none'>
+    <img src='{% static "img/grand_hall.jpg" %}' alt="grand hall" height="600"/>
+    <h3>Grand Hall</h3>
+    <p>Looking around, you see doors to the...</p>
+    <br>
+    <button id="front_door_btn" type="button" class="btn btn-primary">Front Door</button>
+    <button id="living_room_btn" type="button" class="btn btn-primary">Living Room</button>
+    <button id="bedroom_btn" type="button" class="btn btn-primary">Bedroom</button>
+    <button id="library_btn" type="button" class="btn btn-primary">Library</button>
+    <button id="dining_room_btn" type="button" class="btn btn-primary">Dining Room</button>
+  </div>
+
+  <div id='front_door' style='display:none'>
+    <img src='{% static "img/front_door.webp" %}' alt="front door" height="600"/>
+    <br>
+    <h3>Front Door</h3>
+    <p>Drat! I just came in through this door and now it's locked. How do I get out of here?</p>
+    <button id="front_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
 </body>
 </html>
