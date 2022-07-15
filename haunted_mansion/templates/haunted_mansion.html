@@ -7,8 +7,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+  <style>
+
+    .dark-mode {
+      background-color: black;
+      color: white;
+    }
+  </style>
+  
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+      document.body.classList.toggle('dark-mode');
       
       //Start page
       let start_page = document.getElementById('start_page');
@@ -57,13 +67,55 @@
         //grand_hall.style.display = 'none';
       });
 
+      let living_room = document.getElementById('living_room');
+      living_room_btn.addEventListener('click' , () => {
+        showHideRoom(living_room, grand_hall);
+      });
+
+      let bedroom = document.getElementById('bedroom');
+      bedroom_btn.addEventListener('click' , () => {
+        showHideRoom(bedroom, grand_hall);
+      });
+
+      let library = document.getElementById('library');
+      library_btn.addEventListener('click' , () => {
+        showHideRoom(library, grand_hall);
+      });
+
+      let dining_room = document.getElementById('dining_room');
+      dining_room_btn.addEventListener('click' , () => {
+        showHideRoom(dining_room, grand_hall);
+      });
+
       //front door page
       let front_grand_hall_btn = document.getElementById('front_grand_hall_btn');
       front_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, front_door);
       });
 
+      //living room page
+      let living_grand_hall_btn = document.getElementById('living_grand_hall_btn');
+      living_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, living_room);
+      });
 
+      //bedroom
+      let bedroom_grand_hall_btn = document.getElementById('bedroom_grand_hall_btn');
+      bedroom_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, bedroom);
+      });
+
+      //library
+      let library_grand_hall_btn = document.getElementById('library_grand_hall_btn');
+      library_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, library);
+      });
+
+      //dining room
+      let dining_grand_hall_btn = document.getElementById('dining_grand_hall_btn');
+      dining_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, dining_room);
+      });
 
     });
 
@@ -112,6 +164,51 @@
     <h3>Front Door</h3>
     <p>Drat! I just came in through this door and now it's locked. How do I get out of here?</p>
     <button id="front_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='living_room' style='display:none'>
+    <img src='{% static "img/living_room.jpg" %}' alt="living room" height="600"/>
+    <br>
+    <h3>Living Room</h3>
+    <p>This room's pretty empty... wait, what's that?
+      <br>
+      <em>You see an oddly modern smart lock featuring bluetooth access, fingerprint scanner, and voice command. You try out the keypad</em></p>
+    <button id="living_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='bedroom' style='display:none'>
+    <img src='{% static "img/bedroom_door.jpg" %}' alt="bedroom door" height="600"/>
+    <br>
+    <h3>Bedroom</h3>
+    <p>Hmm... door is locked.
+      <br>
+      <em>Ruffling sound</em>
+      <br>
+      There's something inside! Let's get out of here!! </p>
+    <button id="bedroom_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='library' style='display:none'>
+    <img src='{% static "img/library.jpg" %}' alt="library" height="600"/>
+    <br>
+    <h3>Library</h3>
+    <p>Lots of books here. Wonder if there's anything worth reading...</p>
+    <button id="the_closet_btn" type="button" class="btn btn-success">The Closet</button>
+    <button id="temptress_btn" type="button" class="btn btn-success">My Tiny Little Temptress</button>
+    <button id="last_messages_btn" type="button" class="btn btn-success">Last Messages</button>
+    <br>
+    <br>
+    <button id="library_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='dining_room' style='display:none'>
+    <img src='{% static "img/dining_room.jpg" %}' alt="dining room" height="600"/>
+    <br>
+    <h3>Dining room</h3>
+    <p>"whoo-oo-oo-oo..."
+
+      Oh whoops. You weren't supposed to see us. I thought you were going to the other room. Now that you found us, I'll give you a gift if you answer my riddle.</p>
+    <button id="dining_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 
 </body>
