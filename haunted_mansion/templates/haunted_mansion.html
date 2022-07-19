@@ -84,10 +84,10 @@
       let empty_safe = document.getElementById('empty_safe')
       living_room_btn.addEventListener('click' , () => {
         if(front_door_key == false){
-        showHideRoom(living_room, grand_hall);
-        combination.disabled = false;
-        combination_btn.disabled = false;
-        combo_result.innerHTML = '';
+          showHideRoom(living_room, grand_hall);
+          combination.disabled = false;
+          combination_btn.disabled = false;
+          combo_result.innerHTML = '';
         } else {
           showHideRoom(empty_safe, grand_hall);
         }
