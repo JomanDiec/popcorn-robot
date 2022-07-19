@@ -13,6 +13,19 @@
       background-color: black;
       color: white;
     }
+
+    [data-theme="dark"]{
+      color: black;
+    }
+
+    .spoiler{ 
+      color: black; 
+      background-color:black;
+    }
+    
+    .spoiler:hover{
+      color: white;
+      }
   </style>
   
   <script>
@@ -68,8 +81,16 @@
       });
 
       let living_room = document.getElementById('living_room');
+      let empty_safe = document.getElementById('empty_safe')
       living_room_btn.addEventListener('click' , () => {
+        if(front_door_key == false){
         showHideRoom(living_room, grand_hall);
+        combination.disabled = false;
+        combination_btn.disabled = false;
+        combo_result.innerHTML = '';
+        } else {
+          showHideRoom(empty_safe, grand_hall);
+        }
       });
 
       let bedroom = document.getElementById('bedroom');
@@ -99,16 +120,73 @@
         showHideRoom(grand_hall, living_room);
       });
 
+      let combination = document.getElementById('combination');
+      let combination_btn = document.getElementById('combination_btn');
+      let combo_result = document.getElementById('combo_result');
+      combination_btn.addEventListener('click', () => {
+        console.log('click guesser');
+        enterCombo(combination.value);
+      });
+      combination.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          console.log('enter button works!');
+          enterCombo(combination.value);
+        }
+      });
+      let found_key_grand_hall_btn = document.getElementById('found_key_grand_hall_btn');
+      let found_key = document.getElementById('found_key');
+      found_key_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, found_key);
+      });
+
+      let empty_safe_grand_hall_btn = document.getElementById('empty_safe_grand_hall_btn');
+      empty_safe_grand_hall_btn.addEventListener('click', () => {
+        showHideRoom(grand_hall, empty_safe);
+      });
+
       //bedroom
       let bedroom_grand_hall_btn = document.getElementById('bedroom_grand_hall_btn');
       bedroom_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, bedroom);
       });
 
-      //library
+      //library + books
       let library_grand_hall_btn = document.getElementById('library_grand_hall_btn');
       library_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, library);
+      });
+
+      let the_closet = document.getElementById('the_closet');
+      let the_closet_btn = document.getElementById('the_closet_btn');
+      the_closet_btn.addEventListener('click' , () => {
+        showHideRoom(the_closet, library);
+      });
+
+      let finish_closet_btn = document.getElementById('finish_closet_btn');
+      finish_closet_btn.addEventListener('click' , () => {
+        showHideRoom(library, the_closet);
+      });
+
+      let temptress = document.getElementById('temptress');
+      let temptress_btn = document.getElementById('temptress_btn');
+      temptress_btn.addEventListener('click' , () => {
+        showHideRoom(temptress, library);
+      });
+
+      let finish_temptress_btn = document.getElementById('finish_temptress_btn');
+      finish_temptress_btn.addEventListener('click' , () => {
+        showHideRoom(library, temptress);
+      });
+
+      let last_messages = document.getElementById('last_messages');
+      let last_messages_btn = document.getElementById('last_messages_btn');
+      last_messages_btn.addEventListener('click' , () => {
+        showHideRoom(last_messages, library);
+      });
+
+      let finish_messages_btn = document.getElementById('finish_messages_btn');
+      finish_messages_btn.addEventListener('click' , () => {
+        showHideRoom(library, last_messages);
       });
 
       //dining room
@@ -123,6 +201,30 @@
     function showHideRoom(show_room, hide_room) {
       show_room.style.display = 'block';
       hide_room.style.display = 'none';
+    }
+
+    //combination check function
+    let tries_left = 3;
+    var front_door_key = false;
+    function enterCombo(combo){
+      console.log(combo);
+      if (combo != '0711'){
+        if (tries_left > 1){
+          console.log('wrong combo')
+          combo_result.innerHTML = combo + ' is the wrong combination. Try Again!';
+          tries_left -= 1;
+          console.log(tries_left + ' tries left')
+        } else {
+          combo_result.innerHTML = 'Hmm...timed out. Maybe I can try again later.';
+          tries_left = 3;
+          combination.disabled = true;
+          combination_btn.disabled = true;
+        }
+      } else {
+        console.log('correct')
+        showHideRoom(found_key, living_room);
+        front_door_key = true;
+      }
     }
   </script>
 </head>
@@ -173,7 +275,29 @@
     <p>This room's pretty empty... wait, what's that?
       <br>
       <em>You see an oddly modern smart lock featuring bluetooth access, fingerprint scanner, and voice command. You try out the keypad</em></p>
-    <button id="living_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+      <br>
+      <input type="number" placeholder='Enter Combination' id="combination" data-theme ='dark'> <button id="combination_btn" type="button" class="btn btn-primary">Enter</button>
+      <p id='combo_result'>   </p>
+    <br>
+      <button id="living_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='found_key' style='display:none'>
+    <img src='{% static "img/found_key.webp" %}' alt="found the key!" height="600"/>
+    <br>
+    <h3>It Worked!</h3>
+    <p>You find a key inside the safe. I wonder what it's for?</p>
+    <br>
+      <button id="found_key_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='empty_safe' style='display:none'>
+    <img src='{% static "img/empty_safe.jpg" %}' alt="empty safe!" height="600"/>
+    <br>
+    <h3>Living Room</h3>
+    <p>Safe is already opened and you have they key!</p>
+    <br>
+      <button id="empty_safe_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 
   <div id='bedroom' style='display:none'>
@@ -199,6 +323,49 @@
     <br>
     <br>
     <button id="library_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='the_closet' style='display:none'>
+    <img src='{% static "img/clawchaser.webp" %}' alt="the closet" height="600"/>
+    <br>
+    <h3>The Closet</h3>
+    <p>"Dad!" she screamed.</p>
+    <p>"Honey, I'm here. Is everything okay?" he asked.</p>      
+    <p>She nodded. "Clawchaser won't let me sleep."</p>
+    <p>"Clawchaser? That's funny, when I was a kid, my monster's name was Clawchaser too! Maybe he's coming for me, not you." he laughed.</p>      
+    <p>She reached to turn off the light.</p>      
+    <p>"He told me the same thing." </p>
+    <button id="finish_closet_btn" type="button" class="btn btn-primary">Finish Reading</button>
+  </div>
+
+  <div id='temptress' style='display:none'>
+    <img src='{% static "img/temptress.webp" %}' alt="my tiny little temptress" height="600"/>
+    <br>
+    <h3>My Tiny Little Temptress</h3>
+      <p>60% of marriages end in infidelity. All the signs were there, but I didn’t want to believe it. It took a while to accept, but I knew the truth. My husband was cheating on me.</p>
+      <p>Something had to be done, obviously. I love my husband. I’m not having some little temptress steal him away from me! So I took matters into my own hands.</p>
+      <p>Thank god she’s still little. I don’t think I could have drowned her that easily if she could walk just yet.</p>
+      <br>
+      <p><em>Wait what is that written on the side?</em></p>
+
+      <span class='spoiler'>"Combo: 0711"</span>
+    <button id="finish_temptress_btn" type="button" class="btn btn-primary">Finish Reading</button>
+  </div>
+
+  <div id='last_messages' style='display:none'>
+    <img src='{% static "img/axe_murderer.jpg" %}' alt="last messages" height="600"/>    
+    <p>I love you mom</p>
+    <p>I can hear footsteps on the stairs I think he’s outside my room</p>
+    <p>I hear sirens but they’re far away</p>
+    <p>I’m hiding in the closet I hope he didn’t hear me</p>
+    <p>hang on I heard something downstairs</p>
+    <p>the cops are already here looking for him, they’ll catch him</p>
+    <p>Don’t worry mom, I’m SAFE, I love you.</p>
+    <p>The cops said he’s some escaped serial killer and he’s been breaking into homes around the area</p>
+    <p>Yes mom it’s on the news now. Ill keep my doors locked.</p>
+
+    <p><em>* Messages are displayed in chronological order, with most recent at the top.</em></p>
+    <button id="finish_messages_btn" type="button" class="btn btn-primary">Finish Reading</button>
   </div>
 
   <div id='dining_room' style='display:none'>
