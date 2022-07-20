@@ -88,6 +88,7 @@
           combination.disabled = false;
           combination_btn.disabled = false;
           combo_result.innerHTML = '';
+          tries_left = 3;
         } else {
           showHideRoom(empty_safe, grand_hall);
         }
@@ -103,8 +104,22 @@
         showHideRoom(library, grand_hall);
       });
 
+      const riddles = [
+      {'question':'<p>The person who built it sold it.</p><p>The person who bought it never used it.</p><p>The person who used it never saw it.</p><p>What is it?</p>', 'answer':'coffin'},
+      {'question':"<p>I have a name but it isn\’t mine</p><p>You don\’t think about me while in your prime</p><p>People cry when I\’m in their sight</p><p>Others lie with me all day and night.</p><p>What am I?</p>", 'answer':'tombstone'},
+      {'question':'<p>Can I count on you to tell me the next three letters in the sequence:</p><p>OTTFFSS?</p>', 'answer':'ENT'},
+      ]
       let dining_room = document.getElementById('dining_room');
+      let rand_riddle = document.getElementById('rand_riddle');
       dining_room_btn.addEventListener('click' , () => {
+        min = Math.ceil(0);
+        max = Math.floor(2);
+        rand_index = Math.floor(Math.random() * (max - min + 1) + min);
+        rand_riddle.firstChild.innerHTML = riddles[rand_index].question;
+        riddle_answer.disabled = false;
+        riddle_answer_btn.disabled = false;
+        riddle_result.innerHTML = '';
+        tries_left = 3;
         showHideRoom(dining_room, grand_hall);
       });
 
@@ -190,6 +205,20 @@
       });
 
       //dining room
+      let riddle_answer = document.getElementById('riddle_answer');
+      let riddle_answer_btn = document.getElementById('riddle_answer_btn');
+      let riddle_result = document.getElementById('riddle_result');
+      riddle_answer_btn.addEventListener('click', () => {
+        console.log('click riddle guesser');
+        enterCombo(combination.value);
+      });
+      riddle_answer.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          console.log('enter riddle button works!');
+          enterCombo(combination.value);
+        }
+      });
+
       let dining_grand_hall_btn = document.getElementById('dining_grand_hall_btn');
       dining_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, dining_room);
@@ -208,7 +237,7 @@
     var front_door_key = false;
     function enterCombo(combo){
       console.log(combo);
-      if (combo != '0711'){
+      if (combo != '0666'){
         if (tries_left > 1){
           console.log('wrong combo')
           combo_result.innerHTML = combo + ' is the wrong combination. Try Again!';
@@ -226,6 +255,31 @@
         front_door_key = true;
       }
     }
+
+    //riddle check function
+    var bedroom_key = false;
+    let riddle_answer = riddles[rand_index].answer;
+    function answerRiddle(answer){
+      console.log(answer);
+      if (answer != riddle_answer){
+        if (tries_left > 1){
+          console.log('wrong answer');
+          riddle_result.innerHTML = 'Wrong. Try Again!';
+          tries_left -= 1;
+          console.log(tries_left + ' tries left')
+        } else {
+          riddle_result.innerHTML = '<p>' + answer + '!!! BU WA HAHAHA!!!</p><p>... and just like that, the ghost flew away.</p>';
+          tries_left = 3;
+          riddle_answer.disabled = true;
+          riddle_answer_btn.disabled = true;
+        }
+      } else {
+        console.log('correct')
+        showHideRoom(found_bedroom_key, living_room);
+        bedroom_key = true;
+      }
+    }
+
   </script>
 </head>
 
@@ -348,7 +402,7 @@
       <br>
       <p><em>Wait what is that written on the side?</em></p>
 
-      <span class='spoiler'>"Combo: 0711"</span>
+      <span class='spoiler'>"Combo: 0666"</span>
     <button id="finish_temptress_btn" type="button" class="btn btn-primary">Finish Reading</button>
   </div>
 
@@ -374,7 +428,13 @@
     <h3>Dining room</h3>
     <p>"whoo-oo-oo-oo..."
 
-      Oh whoops. You weren't supposed to see us. I thought you were going to the other room. Now that you found us, I'll give you a gift if you answer my riddle.</p>
+      Oh whoops. You weren't supposed to see us. I thought you were going to the other room. Now that you found us, I'll give you a gift if you answer my riddle:</p>
+    
+    <div id='rand_riddle'><em></em></div>
+    <br>
+      <input type="text" placeholder='Enter Answer' id="riddle_answer" data-theme ='dark'> <button id="riddle_answer_btn" type="button" class="btn btn-primary">Enter</button>
+      <p id='riddle_result'>   </p>
+    <br>
     <button id="dining_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 
