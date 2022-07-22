@@ -53,16 +53,12 @@
       let grand_hall = document.getElementById('grand_hall');
       enter_house_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, start_page);
-        //grand_hall.style.display = 'block';
-        //start_page.style.display = 'none';
       });
 
       //start page leave button
       leave_btn.addEventListener('click', () => {
         console.log('hide start and show game over screen')
         showHideRoom(game_over, start_page);
-        //start_page.style.display = 'none';
-        //game_over.style.display = 'block';
       });
 
       //Game over page
@@ -72,17 +68,21 @@
       //game over page start over button
       start_over_btn.addEventListener('click' , () => {
         showHideRoom(start_page, game_over);
-        //start_page.style.display = 'block';
-        //game_over.style.display = 'none';
       });
 
 
-      //grand hall page
+      //grand hall buttons
       let front_door_btn = document.getElementById('front_door_btn');
       let living_room_btn = document.getElementById('living_room_btn');
       let bedroom_btn = document.getElementById('bedroom_btn');
       let library_btn = document.getElementById('library_btn');
       let dining_room_btn = document.getElementById('dining_room_btn');
+
+      //front door page
+      let front_grand_hall_btn = document.getElementById('front_grand_hall_btn');
+      front_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, front_door);
+      });
 
       let front_door = document.getElementById('front_door');
       let unlock_front_door_btn = document.getElementById('unlock_front_door_btn');
@@ -104,7 +104,8 @@
           showHideRoom(you_win, front_door);
         }
       });
-
+      
+      //game win page
       let new_game_btn = document.getElementById('new_game_btn');
       new_game_btn.addEventListener('click' , () => {
         found_jack = false;
@@ -115,8 +116,7 @@
         showHideRoom(start_page, you_win);
       });
 
-      
-
+      //living room page
       let living_room = document.getElementById('living_room');
       let empty_safe = document.getElementById('empty_safe')
       living_room_btn.addEventListener('click' , () => {
@@ -131,50 +131,6 @@
         }
       });
 
-      let bedroom = document.getElementById('bedroom');
-      let unlock_bedroom_btn = document.getElementById('unlock_bedroom_btn');
-      bedroom_btn.addEventListener('click' , () => {
-        if(bedroom_key == true){
-          unlock_bedroom_btn.style.display = 'inline-block';
-        }
-        showHideRoom(bedroom, grand_hall);
-      });
-
-      let library = document.getElementById('library');
-      library_btn.addEventListener('click' , () => {
-        showHideRoom(library, grand_hall);
-      });
-
-      let dining_room = document.getElementById('dining_room');
-      let rand_riddle = document.getElementById('rand_riddle');
-      let riddle_answer_box = document.getElementById('riddle_answer_box');
-      let ghost_intro = document.getElementById('ghost_intro');
-      let ghost_dismiss = document.getElementById('ghost_dismiss');
-      dining_room_btn.addEventListener('click' , () => {
-        if(bedroom_key == false){
-          rand_riddle.firstChild.innerHTML = riddles[rand_index].question;
-          riddle_answer_box.disabled = false;
-          riddle_answer_btn.disabled = false;
-          riddle_result.innerHTML = '';
-          tries_left = 3;
-        } else{
-          rand_riddle.style.display = 'none';
-          riddle_result.style.display = 'none';
-          ghost_intro.style.display = 'none';
-          ghost_dismiss.style.display = 'block';
-          riddle_answer_box.style.display = 'none';
-          riddle_answer_btn.style.display = 'none';
-        }
-        showHideRoom(dining_room, grand_hall);
-      });
-
-      //front door page
-      let front_grand_hall_btn = document.getElementById('front_grand_hall_btn');
-      front_grand_hall_btn.addEventListener('click' , () => {
-        showHideRoom(grand_hall, front_door);
-      });
-
-      //living room page
       let living_grand_hall_btn = document.getElementById('living_grand_hall_btn');
       living_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, living_room);
@@ -193,6 +149,7 @@
           enterCombo(combination.value);
         }
       });
+      
       let found_key_grand_hall_btn = document.getElementById('found_key_grand_hall_btn');
       let found_key = document.getElementById('found_key');
       found_key_grand_hall_btn.addEventListener('click' , () => {
@@ -205,6 +162,14 @@
       });
 
       //bedroom
+      let bedroom = document.getElementById('bedroom');
+      let unlock_bedroom_btn = document.getElementById('unlock_bedroom_btn');
+      bedroom_btn.addEventListener('click' , () => {
+        if(bedroom_key == true){
+          unlock_bedroom_btn.style.display = 'inline-block';
+        }
+        showHideRoom(bedroom, grand_hall);
+      });
      
       let bedroom_grand_hall_btn = document.getElementById('bedroom_grand_hall_btn');
       let jack_grand_hall_btn = document.getElementById('jack_grand_hall_btn');
@@ -220,6 +185,11 @@
       });
 
       //library + books
+      let library = document.getElementById('library');
+      library_btn.addEventListener('click' , () => {
+        showHideRoom(library, grand_hall);
+      });
+      
       let library_grand_hall_btn = document.getElementById('library_grand_hall_btn');
       library_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, library);
@@ -259,6 +229,29 @@
       });
 
       //dining room
+      let dining_room = document.getElementById('dining_room');
+      let rand_riddle = document.getElementById('rand_riddle');
+      let riddle_answer_box = document.getElementById('riddle_answer_box');
+      let ghost_intro = document.getElementById('ghost_intro');
+      let ghost_dismiss = document.getElementById('ghost_dismiss');
+      dining_room_btn.addEventListener('click' , () => {
+        if(bedroom_key == false){
+          rand_riddle.firstChild.innerHTML = riddles[rand_index].question;
+          riddle_answer_box.disabled = false;
+          riddle_answer_btn.disabled = false;
+          riddle_result.innerHTML = '';
+          tries_left = 3;
+        } else{
+          rand_riddle.style.display = 'none';
+          riddle_result.style.display = 'none';
+          ghost_intro.style.display = 'none';
+          ghost_dismiss.style.display = 'block';
+          riddle_answer_box.style.display = 'none';
+          riddle_answer_btn.style.display = 'none';
+        }
+        showHideRoom(dining_room, grand_hall);
+      });
+
       let riddle_answer_btn = document.getElementById('riddle_answer_btn');
       let riddle_result = document.getElementById('riddle_result');
       riddle_answer_btn.addEventListener('click', () => {
