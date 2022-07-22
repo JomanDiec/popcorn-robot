@@ -29,9 +29,20 @@
   </style>
   
   <script>
+    var min = Math.ceil(0);
+    var max = Math.floor(2);
+    var rand_index = Math.floor(Math.random() * (max - min + 1) + min);
+
+    const riddles = [
+      {'question':'<p>The person who built it sold it.</p><p>The person who bought it never used it.</p><p>The person who used it never saw it.</p><p>What is it?</p>', 'answer':'coffin'},
+      {'question':"<p>I have a name but it isn\’t mine</p><p>You don\’t think about me while in your prime</p><p>People cry when I\’m in their sight</p><p>Others lie with me all day and night.</p><p>What am I?</p>", 'answer':'tombstone'},
+      {'question':'<p>Can I count on you to tell me the next three letters in the sequence:</p><p>OTTFFSS?</p>', 'answer':'ENT'},
+      ]
+
     document.addEventListener('DOMContentLoaded', () => {
 
       document.body.classList.toggle('dark-mode');
+      var found_jack = false;
       
       //Start page
       let start_page = document.getElementById('start_page');
@@ -74,11 +85,37 @@
       let dining_room_btn = document.getElementById('dining_room_btn');
 
       let front_door = document.getElementById('front_door');
+      let unlock_front_door_btn = document.getElementById('unlock_front_door_btn');
       front_door_btn.addEventListener('click' , () => {
+        if(front_door_key == true){
+          unlock_front_door_btn.style.display = 'inline-block';
+        }
         showHideRoom(front_door, grand_hall);
-        //front_door.style.display = 'block';
-        //grand_hall.style.display = 'none';
       });
+
+      let front_door_locked = document.getElementById('front_door_locked');
+      let front_door_unlocked = document.getElementById('front_door_unlocked');
+      let you_win = document.getElementById('you_win');
+      unlock_front_door_btn.addEventListener('click' , () => {
+        if (found_jack == false){
+          front_door_locked.style.display = 'none';
+          front_door_unlocked.style.display = 'block';
+        } else{
+          showHideRoom(you_win, front_door);
+        }
+      });
+
+      let new_game_btn = document.getElementById('new_game_btn');
+      new_game_btn.addEventListener('click' , () => {
+        found_jack = false;
+        bedroom_key = false;
+        front_door_key = false;
+        unlock_bedroom_btn.style.display = 'none';
+        unlock_front_door_btn.style.display = 'none';
+        showHideRoom(start_page, you_win);
+      });
+
+      
 
       let living_room = document.getElementById('living_room');
       let empty_safe = document.getElementById('empty_safe')
@@ -95,7 +132,11 @@
       });
 
       let bedroom = document.getElementById('bedroom');
+      let unlock_bedroom_btn = document.getElementById('unlock_bedroom_btn');
       bedroom_btn.addEventListener('click' , () => {
+        if(bedroom_key == true){
+          unlock_bedroom_btn.style.display = 'inline-block';
+        }
         showHideRoom(bedroom, grand_hall);
       });
 
@@ -104,22 +145,26 @@
         showHideRoom(library, grand_hall);
       });
 
-      const riddles = [
-      {'question':'<p>The person who built it sold it.</p><p>The person who bought it never used it.</p><p>The person who used it never saw it.</p><p>What is it?</p>', 'answer':'coffin'},
-      {'question':"<p>I have a name but it isn\’t mine</p><p>You don\’t think about me while in your prime</p><p>People cry when I\’m in their sight</p><p>Others lie with me all day and night.</p><p>What am I?</p>", 'answer':'tombstone'},
-      {'question':'<p>Can I count on you to tell me the next three letters in the sequence:</p><p>OTTFFSS?</p>', 'answer':'ENT'},
-      ]
       let dining_room = document.getElementById('dining_room');
       let rand_riddle = document.getElementById('rand_riddle');
+      let riddle_answer_box = document.getElementById('riddle_answer_box');
+      let ghost_intro = document.getElementById('ghost_intro');
+      let ghost_dismiss = document.getElementById('ghost_dismiss');
       dining_room_btn.addEventListener('click' , () => {
-        min = Math.ceil(0);
-        max = Math.floor(2);
-        rand_index = Math.floor(Math.random() * (max - min + 1) + min);
-        rand_riddle.firstChild.innerHTML = riddles[rand_index].question;
-        riddle_answer.disabled = false;
-        riddle_answer_btn.disabled = false;
-        riddle_result.innerHTML = '';
-        tries_left = 3;
+        if(bedroom_key == false){
+          rand_riddle.firstChild.innerHTML = riddles[rand_index].question;
+          riddle_answer_box.disabled = false;
+          riddle_answer_btn.disabled = false;
+          riddle_result.innerHTML = '';
+          tries_left = 3;
+        } else{
+          rand_riddle.style.display = 'none';
+          riddle_result.style.display = 'none';
+          ghost_intro.style.display = 'none';
+          ghost_dismiss.style.display = 'block';
+          riddle_answer_box.style.display = 'none';
+          riddle_answer_btn.style.display = 'none';
+        }
         showHideRoom(dining_room, grand_hall);
       });
 
@@ -160,9 +205,18 @@
       });
 
       //bedroom
+     
       let bedroom_grand_hall_btn = document.getElementById('bedroom_grand_hall_btn');
+      let jack_grand_hall_btn = document.getElementById('jack_grand_hall_btn');
+      unlock_bedroom_btn.addEventListener('click' , () => {
+        showHideRoom(jack_bedroom, bedroom);
+        found_jack = true;
+      });
       bedroom_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, bedroom);
+      });
+      jack_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, jack_bedroom);
       });
 
       //library + books
@@ -205,23 +259,28 @@
       });
 
       //dining room
-      let riddle_answer = document.getElementById('riddle_answer');
       let riddle_answer_btn = document.getElementById('riddle_answer_btn');
       let riddle_result = document.getElementById('riddle_result');
       riddle_answer_btn.addEventListener('click', () => {
         console.log('click riddle guesser');
-        enterCombo(combination.value);
+        answerRiddle(riddle_answer_box.value);
       });
-      riddle_answer.addEventListener('keypress', function (e) {
+      riddle_answer_box.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
           console.log('enter riddle button works!');
-          enterCombo(combination.value);
+          answerRiddle(riddle_answer_box.value);
         }
       });
 
       let dining_grand_hall_btn = document.getElementById('dining_grand_hall_btn');
       dining_grand_hall_btn.addEventListener('click' , () => {
         showHideRoom(grand_hall, dining_room);
+      });
+
+      let bedroom_key_grand_hall_btn = document.getElementById('bedroom_key_grand_hall_btn');
+      let found_bedroom_key = document.getElementById('found_bedroom_key');
+      bedroom_key_grand_hall_btn.addEventListener('click' , () => {
+        showHideRoom(grand_hall, found_bedroom_key);
       });
 
     });
@@ -261,7 +320,7 @@
     let riddle_answer = riddles[rand_index].answer;
     function answerRiddle(answer){
       console.log(answer);
-      if (answer != riddle_answer){
+      if (answer.toUpperCase() != riddle_answer.toUpperCase()){
         if (tries_left > 1){
           console.log('wrong answer');
           riddle_result.innerHTML = 'Wrong. Try Again!';
@@ -270,12 +329,12 @@
         } else {
           riddle_result.innerHTML = '<p>' + answer + '!!! BU WA HAHAHA!!!</p><p>... and just like that, the ghost flew away.</p>';
           tries_left = 3;
-          riddle_answer.disabled = true;
+          riddle_answer_box.disabled = true;
           riddle_answer_btn.disabled = true;
         }
       } else {
         console.log('correct')
-        showHideRoom(found_bedroom_key, living_room);
+        showHideRoom(found_bedroom_key, dining_room);
         bedroom_key = true;
       }
     }
@@ -288,7 +347,7 @@
   
   <div id='start_page'>
   <img src='{% static "img/haunted_mansion.jpg" %}' alt="Haunted Mansion" height="600"/>
-  <p>You're walking in the forest with your dog, Romeo, when you come across a strange house. Romeo starts getting aggressive and bolts into the house.<br>
+  <p>You're walking in the forest with your dog, Jack, when you come across a strange house. Jack starts getting aggressive and bolts into the house.<br>
 
     You chase after him, but stop at the front door.</p>
     <button id="enter_house_btn" type="button" class="btn btn-primary">Enter House</button>
@@ -297,7 +356,7 @@
 
   <div id='game_over' style='display:none'>
     <img src='{% static "img/you_lose.gif" %}' alt="you lose" height="600"/>
-    <p>You leave and never see Romeo again. You lose.</p>
+    <p>You leave and never see Jack again. You lose.</p>
     <br>
     <button id="start_over" type="button" class="btn btn-primary">Start Over</button>
   </div>
@@ -318,8 +377,18 @@
     <img src='{% static "img/front_door.webp" %}' alt="front door" height="600"/>
     <br>
     <h3>Front Door</h3>
-    <p>Drat! I just came in through this door and now it's locked. How do I get out of here?</p>
+    <p id='front_door_locked'>Drat! I just came in through this door and now it's locked. How do I get out of here?</p>
+    <p id='front_door_unlocked' style='display:none'>The front door key works!! I can leave. Except... aren't we forgetting our little friend?</p>
     <button id="front_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+    <button id="unlock_front_door_btn" type="button" class="btn btn-primary" style='display:none'>Unlock Front Door and Escape!</button>
+  </div>
+
+  <div id='you_win' style='display:none'>
+    <img src='{% static "img/you_win.jpg" %}' alt="you lose" height="600"/>
+    <h3>You Win! Congratulations!</h3>
+    <p>You escaped the Haunted House with Jack. You go out for drinks to celebrate.</p>
+    <br>
+    <button id="new_game_btn" type="button" class="btn btn-primary">New game</button>
   </div>
 
   <div id='living_room' style='display:none'>
@@ -363,7 +432,19 @@
       <em>Ruffling sound</em>
       <br>
       There's something inside! Let's get out of here!! </p>
-    <button id="bedroom_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+    <span><button id="bedroom_grand_hall_btn" type="button" class="btn btn-primary" style='display:inline-block'>Return to Grand Hall</button>
+    <button id="unlock_bedroom_btn" type="button" class="btn btn-primary" style='display:none'>Unlock Bedroom Door</button></span>
+  </div>
+
+  <div id='jack_bedroom' style='display:none'>
+    <img src='{% static "img/bedroom_dog.jpg" %}' alt="Found Jack!" height="600"/>
+    <br>
+    <h3>Bedroom</h3>
+    <p>The key from the ghost worked!</p>
+
+      <p>You found Jack! He's alive and well but a little grumpy for being woken up. Now we need to get out!</p>
+    <br>
+      <button id="jack_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 
   <div id='library' style='display:none'>
@@ -426,16 +507,26 @@
     <img src='{% static "img/dining_room.jpg" %}' alt="dining room" height="600"/>
     <br>
     <h3>Dining room</h3>
-    <p>"whoo-oo-oo-oo..."
+    <p><em>"whoo-oo-oo-oo..."</em></p>
 
-      Oh whoops. You weren't supposed to see us. I thought you were going to the other room. Now that you found us, I'll give you a gift if you answer my riddle:</p>
+    <p id='ghost_intro'>Oh whoops. You weren't supposed to see us. I thought you were going to the other room. Now that you found us, I'll give you a gift if you answer my riddle:</p>
+    <p id='ghost_dismiss' style='display:none'>What are you doing back here? I already gave you the key. Shooo!!!</p>
     
     <div id='rand_riddle'><em></em></div>
     <br>
-      <input type="text" placeholder='Enter Answer' id="riddle_answer" data-theme ='dark'> <button id="riddle_answer_btn" type="button" class="btn btn-primary">Enter</button>
+      <input type="text" placeholder='Enter Answer' id="riddle_answer_box" data-theme ='dark'> <button id="riddle_answer_btn" type="button" class="btn btn-primary">Enter</button>
       <p id='riddle_result'>   </p>
     <br>
     <button id="dining_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+  </div>
+
+  <div id='found_bedroom_key' style='display:none'>
+    <img src='{% static "img/bedroom_key.jpg" %}' alt="solved the riddle!" height="600"/>
+    <br>
+    <h3>You Got It!</h3>
+    <p>"Blast, you're too smart! Here's my gift."</p>
+    <br>
+      <button id="bedroom_key_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 
 </body>
