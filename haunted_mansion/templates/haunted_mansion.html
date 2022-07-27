@@ -3,7 +3,8 @@
 <html lang='en'>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> {% endcomment %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -19,8 +20,8 @@
     }
 
     .spoiler{ 
-      color: black; 
-      background-color:black;
+      color:transparent; 
+      background-color:transparent;
     }
     
     .spoiler:hover{
@@ -32,31 +33,30 @@
 </head>
 
 <body>
-  <div class="card" style="width:90rem; padding: 20px 70px;">
+  <div class="card text-white bg-dark mb-3; card border-danger mb-3" style="width:60rem; padding: 40px 70px; margin:40px;">
     
 
-  <h1>Haunted Mansion</h1>
+  <div class="card-header"><h1>Haunted Mansion</h1></div>
   
   <div id='start_page'>
-  <img src='{% static "img/haunted_mansion.jpg" %}' class="card-img-top" alt="Haunted Mansion" height="500"/>
-  <div class="card-body">
-  <p class='card-text'>You're walking down the street with your dog, Jack, when you come across a strange house. Jack starts getting aggressive and bolts into the house.
+  <img src='{% static "img/haunted_mansion.jpg" %}' class="card-img-top" alt="Haunted Mansion" height="600"/>
+  <p>You're walking down the street with your dog, Jack, when you come across a strange house. Jack starts getting aggressive and bolts into the house.
+    <br>
     <br>
     You chase after him, but stop at the front door.</p>
     <button id="enter_house_btn" type="button" class="btn btn-primary">Enter House</button>
     <button id="leave_btn" type="button" class="btn btn-primary">Leave</button>
   </div>
-</div>
 
   <div id='game_over' style='display:none'>
-    <img src='{% static "img/you_lose.gif" %}' alt="you lose" height="600"/>
+    <img src='{% static "img/you_lose.gif" %}' class="card-img-top" alt="you lose" height="600"/>
     <p>You leave and never see Jack again. You lose.</p>
     <br>
     <button id="start_over" type="button" class="btn btn-primary">Start Over</button>
   </div>
 
   <div id='grand_hall' style='display:none'>
-    <img src='{% static "img/grand_hall.jpg" %}' alt="grand hall" height="600"/>
+    <img src='{% static "img/grand_hall.jpg" %}' class="card-img-top" alt="grand hall" height="600"/>
     <h3>Grand Hall</h3>
     <p>Looking around, you see doors to the...</p>
     <br>
@@ -68,7 +68,7 @@
   </div>
 
   <div id='front_door' style='display:none'>
-    <img src='{% static "img/front_door.webp" %}' alt="front door" height="600"/>
+    <img src='{% static "img/front_door.webp" %}' class="card-img-top" alt="front door" height="600"/>
     <br>
     <h3>Front Door</h3>
     <p id='front_door_locked'>Drat! I just came in through this door and now it's locked. How do I get out of here?</p>
@@ -78,7 +78,7 @@
   </div>
 
   <div id='you_win' style='display:none'>
-    <img src='{% static "img/you_win.jpg" %}' alt="you lose" height="600"/>
+    <img src='{% static "img/you_win.jpg" %}' alt="you win!" height="600"/>
     <h3>You Win! Congratulations!</h3>
     <p>You escaped the Haunted House with Jack. You go out for drinks to celebrate.</p>
     <br>
@@ -86,16 +86,14 @@
   </div>
 
   <div id='living_room' style='display:none'>
-    <img src='{% static "img/living_room.jpg" %}' alt="living room" height="600"/>
+    <img src='{% static "img/living_room.jpg" %}' class="card-img-top" alt="living room" height="600"/>
     <br>
     <h3>Living Room</h3>
     <p>This room's pretty empty... wait, what's that?
       <br>
       <em>You see an oddly modern smart lock featuring bluetooth access, fingerprint scanner, and voice command. You try out the keypad</em></p>
-      <br>
       <input type="number" placeholder='Enter Combination' id="combination" data-theme ='dark'> <button id="combination_btn" type="button" class="btn btn-primary">Enter</button>
       <p id='combo_result'>   </p>
-    <br>
       <button id="living_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 
@@ -109,7 +107,7 @@
   </div>
 
   <div id='empty_safe' style='display:none'>
-    <img src='{% static "img/empty_safe.jpg" %}' alt="empty safe!" height="600"/>
+    <img src='{% static "img/empty_safe.jpg" %}' class="card-img-top" alt="empty safe!" height="600"/>
     <br>
     <h3>Living Room</h3>
     <p>Safe is already opened and you have they key!</p>
@@ -118,7 +116,7 @@
   </div>
 
   <div id='bedroom' style='display:none'>
-    <img src='{% static "img/bedroom_door.jpg" %}' alt="bedroom door" height="600"/>
+    <img src='{% static "img/bedroom_door.jpg" %}' class="card-img-top" alt="bedroom door" height="600"/>
     <br>
     <h3>Bedroom</h3>
     <p>Hmm... door is locked.
@@ -131,7 +129,7 @@
   </div>
 
   <div id='jack_bedroom' style='display:none'>
-    <img src='{% static "img/bedroom_dog.jpg" %}' alt="Found Jack!" height="600"/>
+    <img src='{% static "img/bedroom_dog.jpg" %}' class="card-img-top" alt="Found Jack!" height="600"/>
     <br>
     <h3>Bedroom</h3>
     <p>The key from the ghost worked!</p>
@@ -142,7 +140,7 @@
   </div>
 
   <div id='library' style='display:none'>
-    <img src='{% static "img/library.jpg" %}' alt="library" height="600"/>
+    <img src='{% static "img/library.jpg" %}' class="card-img-top" alt="library" height="600"/>
     <br>
     <h3>Library</h3>
     <p>Lots of books here. Wonder if there's anything worth reading...</p>
@@ -155,7 +153,7 @@
   </div>
 
   <div id='the_closet' style='display:none'>
-    <img src='{% static "img/clawchaser.webp" %}' alt="the closet" height="600"/>
+    <img src='{% static "img/clawchaser.webp" %}' class="card-img-top" alt="the closet" height="600"/>
     <br>
     <h3>The Closet</h3>
     <p>"Dad!" she screamed.</p>
@@ -168,7 +166,7 @@
   </div>
 
   <div id='temptress' style='display:none'>
-    <img src='{% static "img/temptress.webp" %}' alt="my tiny little temptress" height="600"/>
+    <img src='{% static "img/temptress.webp" %}' class="card-img-top" alt="my tiny little temptress" height="600"/>
     <br>
     <h3>My Tiny Little Temptress</h3>
       <p>60% of marriages end in infidelity. All the signs were there, but I didn’t want to believe it. It took a while to accept, but I knew the truth. My husband was cheating on me.</p>
@@ -182,7 +180,7 @@
   </div>
 
   <div id='last_messages' style='display:none'>
-    <img src='{% static "img/axe_murderer.jpg" %}' alt="last messages" height="600"/>    
+    <img src='{% static "img/axe_murderer.jpg" %}' class="card-img-top" alt="last messages" height="600"/>    
     <p>I love you mom</p>
     <p>I can hear footsteps on the stairs I think he’s outside my room</p>
     <p>I hear sirens but they’re far away</p>
@@ -198,7 +196,7 @@
   </div>
 
   <div id='dining_room' style='display:none'>
-    <img src='{% static "img/dining_room.jpg" %}' alt="dining room" height="600"/>
+    <img src='{% static "img/dining_room.jpg" %}' class="card-img-top" alt="dining room" height="600"/>
     <br>
     <h3>Dining room</h3>
     <p><em>"whoo-oo-oo-oo..."</em></p>
@@ -207,10 +205,8 @@
     <p id='ghost_dismiss' style='display:none'>What are you doing back here? I already gave you the key. Shooo!!!</p>
     
     <div id='rand_riddle'><em></em></div>
-    <br>
       <input type="text" placeholder='Enter Answer' id="riddle_answer_box" data-theme ='dark'> <button id="riddle_answer_btn" type="button" class="btn btn-primary">Enter</button>
       <p id='riddle_result'>   </p>
-    <br>
     <button id="dining_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 
@@ -224,12 +220,12 @@
   </div>
 
   <div id='angry_ghost' style='display:none'>
-    <img src='{% static "img/angry_ghost.webp" %}' alt="angry ghost!" height="500"/>
+    <h2>An angry ghost has found you!</h2>
+    <img src='{% static "img/angry_ghost.webp" %}' class="card-img-top" alt="angry ghost!" height="600"/>
     <br>
-    <h3>An angry ghost has found you!</h3>
-    <p>"Blast, you're too smart! Here's my gift."</p>
+    <p>Escape before it scares you to death!</p>
     <br>
-      <button id="bedroom_key_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+      <button id="angry_ghost_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
 </div>
 
@@ -326,6 +322,7 @@
       let empty_safe = document.getElementById('empty_safe')
       living_room_btn.addEventListener('click' , () => {
         if(front_door_key == false){
+          combination.value = '';
           showHideRoom(living_room, grand_hall);
           combination.disabled = false;
           combination_btn.disabled = false;
@@ -441,6 +438,7 @@
       let ghost_dismiss = document.getElementById('ghost_dismiss');
       dining_room_btn.addEventListener('click' , () => {
         if(bedroom_key == false){
+          riddle_answer_box.value = '';
           rand_index = Math.floor(Math.random() * (max - min + 1) + min);
           rand_riddle.firstChild.innerHTML = riddles[rand_index].question;
           riddle_answer_box.disabled = false;
