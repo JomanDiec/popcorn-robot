@@ -482,15 +482,21 @@
 
     });
 
-    //function for switching between rooms
+    //function for switching between rooms and random encounter
+    var escape_ghost = false
     function showHideRoom(show_room, hide_room) {
-      /*if(Math.random() < 0.2){
+      if(Math.random() < 0.2){
         angry_ghost.style.display = 'block';
         hide_room.style.display = 'none';
-      } else{*/
+        setTimeout(function(){
+               if (!escape_ghost) {
+                  // time's up without the event: do something
+               }
+             }, 1000);
+      } else{
         show_room.style.display = 'block';
         hide_room.style.display = 'none';
-      //}
+      }
     }
 
     //combination check function
