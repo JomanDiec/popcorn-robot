@@ -50,7 +50,7 @@
 
   <div id='game_over' style='display:none'>
     <img src='{% static "img/you_lose.gif" %}' class="card-img-top" alt="you lose" height="600"/>
-    <p>You leave and never see Jack again. You lose.</p>
+    <p id='game_over_txt'>You leave and never see Jack again. You lose.</p>
     <br>
     <button id="start_over" type="button" class="btn btn-primary">Start Over</button>
   </div>
@@ -220,12 +220,12 @@
   </div>
 
   <div id='angry_ghost' style='display:none'>
-    <h2>An angry ghost has found you!</h2>
     <img src='{% static "img/angry_ghost.webp" %}' class="card-img-top" alt="angry ghost!" height="600"/>
+    <h2>An angry ghost has found you!</h2>
     <br>
-    <p>Escape before it scares you to death!</p>
+    <h4 id='escape_result' style='color:red'></h3>
     <br>
-      <button id="angry_ghost_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
+      <button id="ghost_grand_hall_btn" type="button" class="btn btn-primary" style="display:none">Return to Grand Hall</button>
   </div>
 </div>
 
@@ -233,6 +233,9 @@
     var min = Math.ceil(0);
     var max = Math.floor(2);
     let rand_index;
+    const char_set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var rand_char;
+    var health = 5;
 
     const riddles = [
       {'question':'<p>The person who built it sold it.</p><p>The person who bought it never used it.</p><p>The person who used it never saw it.</p><p>What is it?</p>', 'answer':'coffin'},
@@ -259,6 +262,7 @@
       //start page leave button
       leave_btn.addEventListener('click', () => {
         console.log('hide start and show game over screen')
+        game_over_txt.innerHTML = 'You leave and never see Jack again. You lose.';
         showHideRoom(game_over, start_page);
       });
 
@@ -268,6 +272,12 @@
       
       //game over page start over button
       start_over_btn.addEventListener('click' , () => {
+        found_jack = false;
+        bedroom_key = false;
+        front_door_key = false;
+        health = 5;
+        unlock_bedroom_btn.style.display = 'none';
+        unlock_front_door_btn.style.display = 'none';
         showHideRoom(start_page, game_over);
       });
 
@@ -312,6 +322,7 @@
         found_jack = false;
         bedroom_key = false;
         front_door_key = false;
+        health = 5;
         unlock_bedroom_btn.style.display = 'none';
         unlock_front_door_btn.style.display = 'none';
         showHideRoom(start_page, you_win);
@@ -480,23 +491,70 @@
         showHideRoom(grand_hall, found_bedroom_key);
       });
 
+      let ghost_grand_hall_btn = document.getElementById('ghost_grand_hall_btn');
+      ghost_grand_hall_btn.addEventListener('click' , () => {
+        ghost_grand_hall_btn.style.display = "none";
+        escape_ghost = false;
+        showHideRoom(grand_hall, angry_ghost);
+      });
+
+      let angry_ghost = document.getElementById('angry_ghost');
+      document.addEventListener('keydown', function (e) {
+        console.log('nothing happens');
+        if(angry_ghost.style.display == "block" && ghost_grand_hall_btn.style.display == "none"){
+          console.log(rand_char);
+          if (e.key.toUpperCase() === rand_char) {
+            console.log('escapeGhost works!');
+            escapeGhost()
+          }
+        }
+        
+      });
+
     });
 
     //function for switching between rooms and random encounter
     var escape_ghost = false
+    let escape_result = document.getElementById('escape_result');
+    let game_over_txt = document.getElementById('game_over_txt');
     function showHideRoom(show_room, hide_room) {
-      if(Math.random() < 0.2){
-        angry_ghost.style.display = 'block';
-        hide_room.style.display = 'none';
-        setTimeout(function(){
-               if (!escape_ghost) {
-                  // time's up without the event: do something
-               }
-             }, 1000);
+      if(start_page.style.display == "none" && game_over.style.display == "none" && angry_ghost.style.display == "none"){
+        if(Math.random() < 0.25){
+          rand_char = char_set.charAt(Math.floor(Math.random() * char_set.length))
+          escape_result.innerHTML = 'Press ' + rand_char + ' to escape!'
+          ghost_grand_hall_btn.style.display = 'none'
+          angry_ghost.style.display = 'block';
+          hide_room.style.display = 'none';
+          setTimeout(function(){
+            if (escape_ghost == false) {
+              health -= 1;
+              if(health != 0){
+                escape_result.innerHTML = 'Too slow! You almost have a heart attack as you escape. You have ' + health + ' health left.'
+                ghost_grand_hall_btn.style.display = 'block'
+                console.log('too slow');
+              }else{
+                game_over_txt.innerHTML = 'The ghost scared you to death! You lose, never learning what happened to Jack...'
+                angry_ghost.style.display = 'none';
+                game_over.style.display = 'block';
+              }                  
+            }
+            }, 900);
+        } else{
+          show_room.style.display = 'block';
+          hide_room.style.display = 'none';
+        }
       } else{
         show_room.style.display = 'block';
         hide_room.style.display = 'none';
-      }
+      }      
+    }
+
+    //escape ghost function
+    function escapeGhost() {
+      console.log('escapeGhost triggered')
+      escape_ghost = true;
+      escape_result.innerHTML = 'Success! You manage to lose the ghost.'
+      ghost_grand_hall_btn.style.display = 'block'
     }
 
     //combination check function
