@@ -3,3 +3,5 @@ extract trivia questions from google doc and organize it into a database
 extract data from specific wikipedia pages and compile it into table for presentation
 
 train AI's to do something cool
+
+gitpod pwd: U.XzJfwc3NWHdy03hxEUMr21SR-KC6FI
