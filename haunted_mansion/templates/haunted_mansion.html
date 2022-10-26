@@ -518,7 +518,7 @@
     let escape_result = document.getElementById('escape_result');
     let game_over_txt = document.getElementById('game_over_txt');
     function showHideRoom(show_room, hide_room) {
-      if(start_page.style.display == "none" && game_over.style.display == "none" && angry_ghost.style.display == "none"){
+      if(start_page.style.display == "none" && game_over.style.display == "none" && angry_ghost.style.display == "none" && living_room.style.display == "none"){
         if(Math.random() < 0.25){
           rand_char = char_set.charAt(Math.floor(Math.random() * char_set.length))
           escape_result.innerHTML = 'Press ' + rand_char + ' to escape!'
