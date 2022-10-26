@@ -33,7 +33,7 @@
 </head>
 
 <body>
-  <div class="card text-white bg-dark mb-3; card border-danger mb-3" style="width:60rem; padding: 40px 70px; margin:40px;">
+  <div id='haunted_mansion' class="card text-white bg-dark mb-3; card border-danger mb-3" style="width:60rem; padding: 40px 70px; margin:40px;">
     
 
   <div class="card-header"><h1>Haunted Mansion</h1></div>
@@ -222,12 +222,15 @@
   <div id='angry_ghost' style='display:none'>
     <img src='{% static "img/angry_ghost.webp" %}' class="card-img-top" alt="angry ghost!" height="600"/>
     <h2>An angry ghost has found you!</h2>
+    <h4 id='escape_key' style='color:red'></h3>
     <br>
     <h4 id='escape_result' style='color:red'></h3>
     <br>
       <button id="ghost_grand_hall_btn" type="button" class="btn btn-primary" style="display:none">Return to Grand Hall</button>
   </div>
 </div>
+
+<audio id='scream' src="{% static 'img/female_scream.wav' %}" preload></audio>
 
   <script>
     var min = Math.ceil(0);
@@ -494,6 +497,7 @@
       let ghost_grand_hall_btn = document.getElementById('ghost_grand_hall_btn');
       ghost_grand_hall_btn.addEventListener('click' , () => {
         ghost_grand_hall_btn.style.display = "none";
+        escape_result.innerHTML = '';
         escape_ghost = false;
         showHideRoom(grand_hall, angry_ghost);
       });
@@ -518,10 +522,13 @@
     let escape_result = document.getElementById('escape_result');
     let game_over_txt = document.getElementById('game_over_txt');
     function showHideRoom(show_room, hide_room) {
+      var scream = document.getElementById('scream');
       if(start_page.style.display == "none" && game_over.style.display == "none" && angry_ghost.style.display == "none" && living_room.style.display == "none"){
         if(Math.random() < 0.25){
+          scream.volume = 1;
+          scream.play();
           rand_char = char_set.charAt(Math.floor(Math.random() * char_set.length))
-          escape_result.innerHTML = 'Press ' + rand_char + ' to escape!'
+          escape_key.innerHTML = 'Press ' + rand_char + ' to escape!'
           ghost_grand_hall_btn.style.display = 'none'
           angry_ghost.style.display = 'block';
           hide_room.style.display = 'none';
@@ -529,6 +536,13 @@
             if (escape_ghost == false) {
               health -= 1;
               if(health != 0){
+                var mansion = document.getElementById('haunted_mansion');
+                // setTimeout(function() {
+                //   mansion.className = (mansion.className == 'black' ? '' : 'white');
+                // }, 500);
+                // setTimeout(function() {
+                //   mansion.style.backgroundColor = (mansion.style.backgroundColor == 'white' ? '' : 'black');
+                // }, 1000);
                 escape_result.innerHTML = 'Too slow! You almost have a heart attack as you escape. You have ' + health + ' health left.'
                 ghost_grand_hall_btn.style.display = 'block'
                 console.log('too slow');
