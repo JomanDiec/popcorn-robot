@@ -503,6 +503,7 @@
         showHideRoom(grand_hall, angry_ghost);
       });
 
+      //random encounter page and escape function
       let angry_ghost = document.getElementById('angry_ghost');
       document.addEventListener('keydown', function (e) {
         console.log('nothing happens');
@@ -541,14 +542,14 @@
                 setTimeout(function() {
                   mansion.classList.toggle('bg-dark');
                     setTimeout(function() {
-                    mansion.classList.toggle('bg-dark');
-                      setTimeout(function() {
                       mansion.classList.toggle('bg-dark');
                         setTimeout(function() {
-                        mansion.classList.toggle('bg-dark');
-                      }, 100);
+                          mansion.classList.toggle('bg-dark');
+                            setTimeout(function() {
+                              mansion.classList.toggle('bg-dark');
+                            }, 100);
+                        }, 100);
                     }, 100);
-                  }, 100);
                 }, 0);
                
                 escape_result.innerHTML = 'Too slow! You almost have a heart attack as you escape. You have ' + health + ' health left.'
