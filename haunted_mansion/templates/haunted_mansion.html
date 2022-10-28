@@ -236,7 +236,7 @@
   <script>
     var min = Math.ceil(0);
     var max = Math.floor(2);
-    let rand_index;
+    var rand_index;
     const char_set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var rand_char;
     var health = 5;
@@ -244,7 +244,7 @@
     const riddles = [
       {'question':'<p>The person who built it sold it.</p><p>The person who bought it never used it.</p><p>The person who used it never saw it.</p><p>What is it?</p>', 'answer':'coffin'},
       {'question':"<p>I have a name but it isn\’t mine</p><p>You don\’t think about me while in your prime</p><p>People cry when I\’m in their sight</p><p>Others lie with me all day and night.</p><p>What am I?</p>", 'answer':'tombstone'},
-      {'question':'<p>Can I count on you to tell me the next three letters in the sequence:</p><p>OTTFFSS?</p>', 'answer':'ENT'},
+      {'question':'<p>Can I <b>count</b> on you to tell me the next three letters in the sequence:</p><p>OTTFFSS?</p>', 'answer':'ENT'},
       ]
 
     document.addEventListener('DOMContentLoaded', () => {
