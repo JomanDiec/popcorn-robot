@@ -525,7 +525,11 @@
     let game_over_txt = document.getElementById('game_over_txt');
     function showHideRoom(show_room, hide_room) {
       var scream = document.getElementById('scream');
-      if(start_page.style.display == "none" && game_over.style.display == "none" && angry_ghost.style.display == "none" && living_room.style.display == "none"){
+      if(hide_room.id == 'start_page' || hide_room.id == 'game_over' || hide_room.id == 'angry_ghost' || show_room.id == 'found_key' || show_room.id == 'found_bedroom_key' || show_room.id == 'jack_bedroom'){
+        console.log('no encounter for ' + hide_room.id);
+        show_room.style.display = 'block';
+        hide_room.style.display = 'none';
+      } else{
         if(Math.random() < 0.25){
           scream.volume = 1;
           scream.play();
@@ -566,9 +570,6 @@
           show_room.style.display = 'block';
           hide_room.style.display = 'none';
         }
-      } else{
-        show_room.style.display = 'block';
-        hide_room.style.display = 'none';
       }      
     }
 
