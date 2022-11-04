@@ -7,6 +7,9 @@ def traverse(request):
 
 def ajax(request):
 
+    # name = request.POST["name"]
+    # print(name)
+
     return render(request, 'ajax.html')
 
 # def haunted_mansion(request):
