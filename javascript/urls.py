@@ -7,6 +7,6 @@ app_name = 'javascript'
 
 urlpatterns = [
     path('traverse', views.traverse, name='traverse'),
-
+    path ('ajax', views.ajax, name='ajax'),
     
 ]
