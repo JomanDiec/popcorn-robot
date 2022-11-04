@@ -34,14 +34,19 @@
 </head>
 
 <body>
-  <div id='haunted_mansion' class="card text-white; bg-dark mb-3; card border-danger mb-3" style="width:60rem; padding: 40px 70px; margin:40px;">
+  <div 
+    id='haunted_mansion' 
+    class="card text-white; bg-dark mb-3; card border-danger mb-3" 
+    style="width:60rem; padding: 40px 70px; margin:40px;">
     
 
-  <div class="card-header"><h1>Haunted Mansion</h1></div>
+  <div class="card-header">
+    <h1>Haunted Mansion</h1>
+  </div>
   
   <div id='start_page'>
-  <img src='{% static "img/haunted_mansion.jpg" %}' class="card-img-top" alt="Haunted Mansion" height="600">
-  <p>You're walking down the street with your dog, Jack, when you come across a strange house. Jack starts getting aggressive and bolts into the house.
+    <img src='{% static "img/haunted_mansion.jpg" %}' class="card-img-top" alt="Haunted Mansion" height="600">
+    <p>You're walking down the street with your dog, Jack, when you come across a strange house. Jack starts getting aggressive and bolts into the house.
     <br>
     <br>
     You chase after him, but stop at the front door.</p>
@@ -93,7 +98,10 @@
     <p>This room's pretty empty... wait, what's that?
       <br>
       <em>You see an oddly modern smart lock featuring bluetooth access, fingerprint scanner, and voice command. You try out the keypad</em></p>
-      <input type="number" placeholder='Enter Combination' id="combination" data-theme ='dark'> <button id="combination_btn" type="button" class="btn btn-primary">Enter</button>
+      <input type="number" placeholder='Enter Combination' id="combination" data-theme ='dark'>
+      <button id="combination_btn" type="button" class="btn btn-primary">
+        Enter
+      </button>
       <p id='combo_result'>   </p>
       <button id="living_grand_hall_btn" type="button" class="btn btn-primary">Return to Grand Hall</button>
   </div>
@@ -125,8 +133,10 @@
       <em>Ruffling sound</em>
       <br>
       There's something inside! Let's get out of here!! </p>
-    <span><button id="bedroom_grand_hall_btn" type="button" class="btn btn-primary" style='display:inline-block'>Return to Grand Hall</button>
-    <button id="unlock_bedroom_btn" type="button" class="btn btn-primary" style='display:none'>Unlock Bedroom Door</button></span>
+    <span>
+      <button id="bedroom_grand_hall_btn" type="button" class="btn btn-primary" style='display:inline-block'>Return to Grand Hall</button>
+      <button id="unlock_bedroom_btn" type="button" class="btn btn-primary" style='display:none'>Unlock Bedroom Door</button>
+    </span>
   </div>
 
   <div id='jack_bedroom' style='display:none'>
@@ -418,6 +428,33 @@
         showHideRoom(the_closet, library);
       });
 
+
+      // AJ Changes
+
+      // <button class="btn_room" onclick="showRoom('the_library')">Whatever</button>
+
+      
+      // <button class="btn_room" data-room="the_library">Whatever</button>
+
+      // let btn_change_rooms = document.getElementsByClassName("btn_room")
+      // for (btn on btn_change_rooms) {
+
+      //   btn_change_rooms.addEventListener('click' , () => {
+      //     room_name = this.data_room // the_closet
+      //     showRoom(room_name);
+      //   });
+
+      // }
+
+
+
+
+
+
+
+
+
+
       let finish_closet_btn = document.getElementById('finish_closet_btn');
       finish_closet_btn.addEventListener('click' , () => {
         showHideRoom(library, the_closet);
@@ -523,13 +560,28 @@
     var escape_ghost = false
     let escape_result = document.getElementById('escape_result');
     let game_over_txt = document.getElementById('game_over_txt');
+
+    // show and hide rooms
     function showHideRoom(show_room, hide_room) {
       var scream = document.getElementById('scream');
-      if(hide_room.id == 'start_page' || hide_room.id == 'game_over' || hide_room.id == 'angry_ghost' || show_room.id == 'found_key' || show_room.id == 'found_bedroom_key' || show_room.id == 'jack_bedroom'){
+
+      // rooms that will not trigger a random encounter
+      if(
+        hide_room.id == 'start_page' || 
+        hide_room.id == 'game_over' || 
+        hide_room.id == 'angry_ghost' ||
+        hide_room.id == 'you_win' || 
+        show_room.id == 'found_key' || 
+        show_room.id == 'found_bedroom_key' || 
+        show_room.id == 'jack_bedroom'){
         console.log('no encounter for ' + hide_room.id);
         show_room.style.display = 'block';
         hide_room.style.display = 'none';
-      } else{
+      } 
+      else {
+
+        // The rooms you may have a random encounter
+        // If the random encounter is triggered...
         if(Math.random() < 0.25){
           scream.volume = 1;
           scream.play();
@@ -543,6 +595,8 @@
               health -= 1;
               if(health != 0){
                 var mansion = document.getElementById('haunted_mansion');
+
+                // make mansion blink
                 setTimeout(function() {
                   mansion.classList.toggle('bg-dark');
                     setTimeout(function() {
