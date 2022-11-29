@@ -10,5 +10,6 @@ urlpatterns = [
     path ('ajax', views.ajax, name='ajax'),
     path('name', views.name, name='name'),
     path('name_2', views.name_2, name='name_2'),
+    path('sally', views.sally, name='sally'),
     
 ]

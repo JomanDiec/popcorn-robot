@@ -23,6 +23,11 @@ def name_2(request):
   names = ["Lesley", "Emily"]
   return HttpResponse(json.dumps(names))
 
+def sally(request):
+    person = json.loads(request.POST["person"])
+    print(person['age'])
+    return HttpResponse(person['age'])
+
 # def haunted_mansion(request):
 
 #     return render(request,'javascript/haunted_mansion.html')

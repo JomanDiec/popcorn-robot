@@ -18,15 +18,33 @@
 
 </html>
 
-<!-- let params = new URLSearchParams();
+<script>
+// let params = new URLSearchParams();
+// params.append('csrfmiddlewaretoken', csrftoken);
+// params.append('names', JSON.stringify(["kelvin", "joseph"]));       // attach parameters here
+
+// fetch('https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/name', {
+//   method: 'POST',
+//   body: params,      // attach params object to request
+// })
+//   .then(response => response.text())    // read response body and parse as text
+//   .then(data => console.log(data));    // your code here
+
+// console.log("Finished!")
+
+let params = new URLSearchParams();
 params.append('csrfmiddlewaretoken', csrftoken);
-params.append('names', JSON.stringify(["kelvin", "joseph"]));       // attach parameters here
+params.append('person', JSON.stringify({'name': 'Sally', 'age': 52}));
 
-fetch('https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us74.gitpod.io/name', {
-  method: 'POST',
-  body: params,      // attach params object to request
-})
-  .then(response => response.text())    // read response body and parse as text
-  .then(data => console.log(data));    // your code here
+async function sallyAge() {
+  let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/sally';
+  let response = await fetch(url, {
+method: 'POST',
+body: params,      // attach params object to request
+});    // fetch data
+  let data = await response.json();     // read response body and parse as JSon
+  console.log(data);
+}
 
-console.log("Finished!") -->
+sallyAge()
+</script>
