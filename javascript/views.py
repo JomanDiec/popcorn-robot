@@ -28,6 +28,16 @@ def sally(request):
     print(person['age'])
     return HttpResponse(person['age'])
 
+def click_me(request):
+    title = ["And change it to an AJAX title!"]
+
+    return HttpResponse(json.dumps(title))
+
+def make_list(request):
+    animals = ["Elephant", "Giraffe", "Lion", "Pika"]
+
+    return HttpResponse(json.dumps(animals))
+
 # def haunted_mansion(request):
 
 #     return render(request,'javascript/haunted_mansion.html')

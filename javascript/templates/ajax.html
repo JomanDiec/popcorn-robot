@@ -9,7 +9,18 @@
     {% csrf_token %}
     <h1 id="name">Joman</h1>
 
-    <button>Click Me!</button>
+    <h2 id="normal_title">Take a normal title...</h2>
+    <button id="click_me_btn" onclick="changeTitle()">Click Me!</button>
+
+    <h2>Make a list!</h2>
+    <ol id="animal_list">
+
+    </ol>
+    <button onclick="makeList()">Make a list!</button>
+
+    <h2>Checkbox</h2>
+    <input type="checkbox" id="AJAX_me">
+    <label for="AJAX_me">AJAX me</label>
 
 <script>
     const csrftoken = Cookies.get('csrftoken');
@@ -21,6 +32,12 @@
 </html>
 
 <script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+
+
+  });
 // let params = new URLSearchParams();
 // params.append('csrfmiddlewaretoken', csrftoken);
 // params.append('names', JSON.stringify(["kelvin", "joseph"]));       // attach parameters here
@@ -34,6 +51,7 @@
 
 // console.log("Finished!")
 
+// exercise 1
 let params = new URLSearchParams();
 params.append('csrfmiddlewaretoken', csrftoken);
 params.append('person', JSON.stringify({'name': 'Sally', 'age': 52}));
@@ -49,4 +67,26 @@ body: params,      // attach params object to request
 }
 
 sallyAge()
+
+async function changeTitle() {
+  let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/click_me';
+  let response = await fetch(url);    // fetch data
+  let data = await response.json();     // read response body and parse as JSon
+  const normal_title = document.getElementById("normal_title");
+  console.log("click me changed title to: " + data);
+  normal_title.innerHTML = data;
+}
+
+async function makeList() {
+  let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/make_list';
+  let response = await fetch(url);    // fetch data
+  let data = await response.json();     // read response body and parse as JSon
+  const animal_list = document.getElementById("animal_list");
+  console.log(data);
+  for (let i = 0; i < data.length; i++) {
+    animal_list.innerHTML += "<li>" + data[i] + "</li>";
+} 
+}
+
+
 </script>
