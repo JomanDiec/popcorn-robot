@@ -13,5 +13,7 @@ urlpatterns = [
     path('sally', views.sally, name='sally'),
     path('click_me', views.click_me, name='click_me'),
     path('make_list', views.make_list, name='make_list'),
+    path('ajax_me', views.ajax_me, name='ajax_me'),
+    path('ajax_check', views.ajax_check, name='ajax_check'),
     
 ]

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from javascript.models import *
 import json
 
 # Create your views here.
@@ -8,11 +9,11 @@ def traverse(request):
     return render(request,'javascript/traverse.html')
 
 def ajax(request):
+    ajax_check = AjaxMe.objects.get(id=1).checkbox
 
-    # name = request.POST["name"]
-    # print(name)
-
-    return render(request, 'ajax.html')
+    context = { 'ajax_check' : ajax_check}
+    return render(request, 'ajax.html', context)
+    
 
 def name(request):
     names = json.loads(request.POST["names"])
@@ -39,8 +40,23 @@ def make_list(request):
     return HttpResponse(json.dumps(animals))
 
 def ajax_me(request):
+    checkbox = AjaxMe.objects.get(id=1)
+    if checkbox.checkbox == False:
+        checkbox.checkbox = True
+    else:
+        checkbox.checkbox = False
+    
+    checkbox.save()
+    print(checkbox.checkbox)
 
-    return HttpResponse()
+    return HttpResponse(json.dumps(checkbox.checkbox))
+
+# function not in use
+def ajax_check(request):
+    ajax_check = AjaxMe.objects.get(id=1).checkbox
+    print(ajax_check)
+    
+    return HttpResponse(json.dumps(ajax_check))
 
 # def haunted_mansion(request):
 

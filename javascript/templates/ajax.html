@@ -19,8 +19,10 @@
     <button onclick="makeList()">Make a list!</button>
 
     <h2>Checkbox</h2>
-    <input type="checkbox" id="AJAX_me" onclick="AjaxMe()">
-    <label for="AJAX_me">AJAX me</label>
+    <input type="checkbox" id="Ajax_me" onclick="AjaxMe()">
+    <label for="Ajax_me">AJAX me</label>
+
+    {{ ajax_check|json_script:'json-ajax-check' }}
 
 <script>
     const csrftoken = Cookies.get('csrftoken');
@@ -32,11 +34,12 @@
 </html>
 
 <script>
+  const ajax_check = JSON.parse(document.getElementById('json-ajax-check').textContent);
 
   document.addEventListener('DOMContentLoaded', () => {
 
-
-
+      document.getElementById("Ajax_me").checked = ajax_check;
+    
   });
 // let params = new URLSearchParams();
 // params.append('csrfmiddlewaretoken', csrftoken);
@@ -59,9 +62,9 @@ params.append('person', JSON.stringify({'name': 'Sally', 'age': 52}));
 async function sallyAge() {
   let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/sally';
   let response = await fetch(url, {
-method: 'POST',
-body: params,      // attach params object to request
-});    // fetch data
+    method: 'POST',
+    body: params,      // attach params object to request
+  });    // fetch data
   let data = await response.json();     // read response body and parse as JSon
   console.log(data);
 }
@@ -91,7 +94,19 @@ async function makeList() {
 
 //exercise 3
 async function AjaxMe() {
-  
+  let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/ajax_me';
+  let response = await fetch(url);    // fetch data
+  let data = await response.json();     // read response body and parse as JSon
+  console.log(data)
 }
+
+//function not in use
+async function AjaxCheck() {
+  let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/ajax_check';
+  let response = await fetch(url);    // fetch data
+  let data = await response.json();     // read response body and parse as JSon
+  console.log(data)
+}
+
 
 </script>
