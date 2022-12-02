@@ -19,7 +19,7 @@
     <button onclick="makeList()">Make a list!</button>
 
     <h2>Checkbox</h2>
-    <input type="checkbox" id="AJAX_me">
+    <input type="checkbox" id="AJAX_me" onclick="AjaxMe()">
     <label for="AJAX_me">AJAX me</label>
 
 <script>
@@ -77,6 +77,7 @@ async function changeTitle() {
   normal_title.innerHTML = data;
 }
 
+//exercise 2
 async function makeList() {
   let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/make_list';
   let response = await fetch(url);    // fetch data
@@ -88,5 +89,9 @@ async function makeList() {
 } 
 }
 
+//exercise 3
+async function AjaxMe() {
+  
+}
 
 </script>

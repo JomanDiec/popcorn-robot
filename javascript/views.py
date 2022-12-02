@@ -38,6 +38,10 @@ def make_list(request):
 
     return HttpResponse(json.dumps(animals))
 
+def ajax_me(request):
+
+    return HttpResponse()
+
 # def haunted_mansion(request):
 
 #     return render(request,'javascript/haunted_mansion.html')
