@@ -129,6 +129,6 @@ X_FRAME_OPTIONS = '*'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR , "media")
 
-CSRF_TRUSTED_ORIGINS = [ 'https://8000-jomandiec-popcornrobot-mmtwt672vbq.ws-us72.gitpod.io' ]
+CSRF_TRUSTED_ORIGINS = [ 'https://*.gitpod.io' ]
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
