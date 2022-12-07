@@ -58,6 +58,14 @@ def ajax_check(request):
     
     return HttpResponse(json.dumps(ajax_check))
 
+def show_animal(request):
+    animal = json.loads(request.POST["animal"])
+    query = Animal.objects.get(name=animal)
+    data = {'name': query.name, 'description': query.description}
+    print(query)
+
+    return HttpResponse(json.dumps(data))
+
 # def haunted_mansion(request):
 
 #     return render(request,'javascript/haunted_mansion.html')

@@ -4,6 +4,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
+<style>
+
+  </style>
+
 </head>
 <body>
     {% csrf_token %}
@@ -21,6 +25,18 @@
     <h2>Checkbox</h2>
     <input type="checkbox" id="Ajax_me" onclick="AjaxMe()">
     <label for="Ajax_me">AJAX me</label>
+
+    <h2>Select Box</h2>
+      <select style="width:600px;">
+        <option value="0" onclick="ShowAnimal('Select')">--Select Animal--</option>
+        <option value="1" onclick="ShowAnimal('Elephant')">Elephant</option>
+        <option value="2" onclick="ShowAnimal('Giraffe')">Giraffe</option>
+        <option value="3" onclick="ShowAnimal('Lion')">Lion</option>
+        <option value="4" onclick="ShowAnimal('Pika')">Pika</option>
+      </select>
+    
+      <h3 id="animal_name"></h3>
+      <div id="animal_description" style="width:600px;"></div>
 
     {{ ajax_check|json_script:'json-ajax-check' }}
 
@@ -55,11 +71,12 @@
 // console.log("Finished!")
 
 // exercise 1
-let params = new URLSearchParams();
-params.append('csrfmiddlewaretoken', csrftoken);
-params.append('person', JSON.stringify({'name': 'Sally', 'age': 52}));
+
 
 async function sallyAge() {
+  let params = new URLSearchParams();
+  params.append('csrfmiddlewaretoken', csrftoken);
+  params.append('person', JSON.stringify({'name': 'Sally', 'age': 52}));
   let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/sally';
   let response = await fetch(url, {
     method: 'POST',
@@ -108,5 +125,27 @@ async function AjaxCheck() {
   console.log(data)
 }
 
+//exercise 4
+async function ShowAnimal(animal) {
+  const animal_name = document.getElementById("animal_name");
+  const animal_description = document.getElementById("animal_description");
+  if(animal == 'Select'){
+    animal_name.style.display = 'none';
+    animal_description.style.display = 'none';
+  }else{
+    let params = new URLSearchParams();
+    params.append('csrfmiddlewaretoken', csrftoken);
+    params.append('animal', JSON.stringify(animal));
+    let url = 'https://8000-jomandiec-popcornrobot-s0vjsd3hdnb.ws-us77.gitpod.io/show_animal';
+    let response = await fetch(url, {
+      method: 'POST',
+      body: params,      // attach params object to request
+    });   // fetch data
+    let data = await response.json();     // read response body and parse as JSon
+    animal_name.innerHTML = data.name;
+    animal_description.innerHTML = data.description;
+  }
+  
+}
 
 </script>
