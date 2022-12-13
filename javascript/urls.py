@@ -16,5 +16,6 @@ urlpatterns = [
     path('ajax_me', views.ajax_me, name='ajax_me'),
     path('ajax_check', views.ajax_check, name='ajax_check'),
     path('show_animal', views.show_animal, name='show_animal'),
+    path('quote_me', views.quote_me, name='quote_me'),
     
 ]

@@ -10,8 +10,11 @@ def traverse(request):
 
 def ajax(request):
     ajax_check = AjaxMe.objects.get(id=1).checkbox
+    quote = QuoteMe.objects.get(id=1)
+    current_quote = quote.quote
+    current_author = quote.author
 
-    context = { 'ajax_check' : ajax_check}
+    context = { 'ajax_check' : ajax_check, 'current_quote' : current_quote, 'current_author' : current_author}
     return render(request, 'ajax.html', context)
     
 
@@ -62,7 +65,17 @@ def show_animal(request):
     animal = json.loads(request.POST["animal"])
     query = Animal.objects.get(name=animal)
     data = {'name': query.name, 'description': query.description}
-    print(query)
+    print(animal)
+
+    return HttpResponse(json.dumps(data))
+
+def quote_me(request):
+    quote_data = json.loads(request.POST["quote"])
+    query = QuoteMe.objects.get(id=1)
+    query.quote = quote_data['quote']
+    query.author = quote_data['author']
+    query.save()
+    data = {'quote' : query.quote, 'author' : query.author}
 
     return HttpResponse(json.dumps(data))
 
