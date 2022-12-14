@@ -136,7 +136,8 @@ input[type=button] {
   const quote = document.getElementById("quote");
   const current_quote = JSON.parse(document.getElementById('json-current-quote').textContent);
   const author = document.getElementById("author");
-  const current_author = JSON.parse(document.getElementById('json-current-author').textContent);
+  // const current_author = JSON.parse(document.getElementById('json-current-author').textContent);
+  const current_author = "{{current_author}}"
 
   document.addEventListener('DOMContentLoaded', () => {
 
