@@ -257,6 +257,7 @@
     var rand_char;
     var health = parseInt(JSON.parse(document.getElementById('json-health').textContent));
 
+
     const riddles = [
       {'question':'<p>The person who built it sold it.</p><p>The person who bought it never used it.</p><p>The person who used it never saw it.</p><p>What is it?</p>', 'answer':'coffin'},
       {'question':"<p>I have a name but it isn\’t mine</p><p>You don\’t think about me while in your prime</p><p>People cry when I\’m in their sight</p><p>Others lie with me all day and night.</p><p>What am I?</p>", 'answer':'tombstone'},
@@ -264,6 +265,7 @@
       ]
 
     document.addEventListener('DOMContentLoaded', () => {
+      console.log(health);
 
       document.body.classList.toggle('dark-mode');
       var found_jack = false;
@@ -283,6 +285,7 @@
       leave_btn.addEventListener('click', () => {
         console.log('hide start and show game over screen')
         game_over_txt.innerHTML = 'You leave and never see Jack again. You lose.';
+        resetGame();
         showHideRoom(game_over, start_page);
       });
 
@@ -292,12 +295,6 @@
       
       //game over page start over button
       start_over_btn.addEventListener('click' , () => {
-        found_jack = false;
-        bedroom_key = false;
-        front_door_key = false;
-        health = 5;
-        unlock_bedroom_btn.style.display = 'none';
-        unlock_front_door_btn.style.display = 'none';
         showHideRoom(start_page, game_over);
       });
 
@@ -332,6 +329,7 @@
           front_door_locked.style.display = 'none';
           front_door_unlocked.style.display = 'block';
         } else{
+          resetGame();
           showHideRoom(you_win, front_door);
         }
       });
@@ -339,12 +337,6 @@
       //game win page
       let new_game_btn = document.getElementById('new_game_btn');
       new_game_btn.addEventListener('click' , () => {
-        found_jack = false;
-        bedroom_key = false;
-        front_door_key = false;
-        health = 5;
-        unlock_bedroom_btn.style.display = 'none';
-        unlock_front_door_btn.style.display = 'none';
         showHideRoom(start_page, you_win);
       });
 
@@ -541,7 +533,6 @@
       //random encounter page and escape function
       let angry_ghost = document.getElementById('angry_ghost');
       document.addEventListener('keydown', function (e) {
-        console.log('nothing happens');
         if(angry_ghost.style.display == "block" && ghost_grand_hall_btn.style.display == "none"){
           console.log(rand_char);
           if (e.key.toUpperCase() === rand_char) {
@@ -615,6 +606,7 @@
                 game_over_txt.innerHTML = 'The ghost scared you to death! You lose, never learning what happened to Jack...'
                 angry_ghost.style.display = 'none';
                 game_over.style.display = 'block';
+                resetGame();
               }                  
             }
             }, 1200);
@@ -683,6 +675,22 @@
         showHideRoom(found_bedroom_key, dining_room);
         bedroom_key = true;
       }
+    }
+
+    //resets all game variables
+    async function resetGame(){
+      let url = '{% url "haunted_mansion:reset_game" %}';
+      let response = await fetch(url);
+      let data = await response.json();
+      console.log('game state resetted!')
+      console.log('New game: ' + data.new_game);
+      console.log('Health: ' + data.health);
+      console.log('Found Bedroom Key: ' + data.bedroom_key);
+      console.log('Found front door key: ' + data.front_key);
+      console.log('Found jack: ' + data.jack_found);
+
+      unlock_bedroom_btn.style.display = 'none';
+      unlock_front_door_btn.style.display = 'none';
     }
 
   </script>

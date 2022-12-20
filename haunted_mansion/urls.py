@@ -8,5 +8,6 @@ app_name = 'haunted_mansion'
 urlpatterns = [
     path('index', views.index, name='index'),
     path('haunted_mansion', views.haunted_mansion, name='haunted_mansion'),
+    path('reset_game', views.reset_game, name='reset_game'),
     
 ]
