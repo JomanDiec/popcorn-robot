@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django-heroku
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -137,4 +136,5 @@ CSRF_TRUSTED_ORIGINS = [ 'https://*.gitpod.io' ]
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
-django-heroku.settings(locals)
+import django_heroku
+django_heroku.settings(locals())
