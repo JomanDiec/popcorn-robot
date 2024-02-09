@@ -1,3 +1,14 @@
+-Must install following modules before running:
+
+pip install whitenoise
+pip install dj-database-url
+
+- heroku settings can be commented out so it can be run locally, otherwise use:
+
+pip install django_heroku
+
+
+
 install Pillow library for image handling.
 
 # Developing Django on Repl.it
