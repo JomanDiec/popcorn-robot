@@ -39,8 +39,8 @@ print(string)
 
 # Explaination:
 # This function works by first extracting the data from the coding_qual_input.txt file into the array 'new_order' then sorting it by the first item of each list cast as an integer.
-# It then uses a for loop to iterate through 'new_order' by checking if the current item's index is equal to the 'index' variable. If it is, then that item is added to the array 'decode_data' and the 'level' and 'index' variables are updated before moving on to the next item.
-# Finally, it uses one last for loop to iterate through the complete 'decode_data' array, adding a space and the word in each item i.e. data[1], to the 'string' variable which is what gets returned by the function.
+# It then uses a for loop to iterate through 'new_order' by checking if the current item's index is equal to the 'index' variable. If it is, then the second item in that mini-list is added to the array 'decode_data' and the 'level' and 'index' variables are updated before moving on to the next item.
+# Finally, all the words in 'decode_data' are combined into a single string using the join function which is what gets returned.
 
 
 # I'm a biologist by education (MS in biotechnology) and have been doing research work at various labs for most of my life. In recent years I have been taking classes in full-stack web development through a mentorship program (not a boot camp as my mentor likes to emphasize!) followed by some paid, part-time web development work during and after graduation. I initially did this to complement my existing skills as a biologist so I could work in a field like bioinformatics but I'd be open to a pure developer job if the right opportunity came along.
