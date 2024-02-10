@@ -25,15 +25,15 @@ index = 0
 level = 1
 
 for data in new_order:
-   if (new_order.index(data)) == index:
-       decode_data.append(data)
+   if new_order.index(data) == index:
+       decode_data.append(data[1])
        level += 1
        index += level
 
-string = ''
+string = ' '.join(decode_data)
 
-for data in decode_data:
-   string += ' ' + data[1]
+# for data in decode_data:
+#    string += ' ' + data[1]
 
 print(string)
 
